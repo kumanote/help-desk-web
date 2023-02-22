@@ -4,7 +4,7 @@ module.exports = {
   tabWidth: 2,
   useTabs: false,
   importOrder: [
-    // '^@/locales/(.*)$',
+    '^@/dictionaries/(.*)$',
     // '^@/images/(.*)$',
     // '^@/components/(.*)$',
     '^@/app/(.*)$',

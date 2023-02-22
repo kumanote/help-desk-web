@@ -1,9 +1,9 @@
 import '@/app/globals.css'
 
-import { locales } from '@/lib/language'
+import { languages } from '@/lib/language'
 
 export async function generateStaticParams() {
-  return locales.map((lang) => ({ lang }))
+  return languages.map((lang) => ({ lang }))
 }
 
 export default function PublicRootLayout({

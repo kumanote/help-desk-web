@@ -6,8 +6,8 @@ const dictionaries = {
   vi: () => import('@/dictionaries/vi.json').then((module) => module.default),
 }
 
-export const getDictionary = async (locale: string) => {
-  switch (locale) {
+export const getDictionary = async (language: string) => {
+  switch (language) {
     case 'ja':
       return dictionaries.ja()
     case 'vi':
