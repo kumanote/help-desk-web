@@ -1,11 +1,41 @@
 import { API_BASE_URL } from '@/lib/constants'
 
-import { Workspace } from '@/api/schema/workspace'
+export async function getWorkspace({ lang }: { lang: string }) {
+  return await fetch(`${API_BASE_URL}/workspace`, {
+    method: 'GET',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+    },
+  })
+}
 
-export async function getWorkspace(): Promise<Workspace | null> {
-  const res = await fetch(`${API_BASE_URL}/workspace`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch workspace')
+export async function initWorkspace({
+  lang,
+  workspace_name,
+  first_agent_email,
+  first_agent_password,
+  first_agent_name,
+}: {
+  lang: string
+  workspace_name: string
+  first_agent_email: string
+  first_agent_password: string
+  first_agent_name: string
+}) {
+  const data = {
+    workspace_name,
+    first_agent_email,
+    first_agent_password,
+    first_agent_name,
   }
-  return res.json()
+  return await fetch(`${API_BASE_URL}/workspace`, {
+    method: 'POST',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
 }

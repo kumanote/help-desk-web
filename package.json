@@ -31,6 +31,7 @@
     "eslint-config-next": "13.1.6",
     "focus-visible": "^5.2.0",
     "framer-motion": "^9.0.2",
+    "grapheme-splitter": "^1.0.4",
     "klona": "^2.0.6",
     "negotiator": "^0.6.3",
     "next": "13.1.6",

@@ -25,7 +25,7 @@ export default async function WelcomePage({
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="sheet-bg-color py-8 px-4 sm:rounded-lg sm:px-10">
-            <WelcomeForm dict={dict} />
+            <WelcomeForm lang={lang} dict={dict} />
           </div>
         </div>
       </div>
