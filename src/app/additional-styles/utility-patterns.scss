@@ -1,0 +1,21 @@
+/* text colors */
+.title-text-color {
+  @apply text-gray-900 dark:text-gray-50;
+}
+
+.label-text-color {
+  @apply text-gray-700 dark:text-gray-200;
+}
+
+.text-color {
+  @apply text-gray-600 dark:text-gray-300;
+}
+
+.dimmed-text-color {
+  @apply text-gray-400 dark:text-gray-600;
+}
+
+/* back ground colors */
+.sheet-bg-color {
+  @apply bg-white shadow dark:bg-zinc-900 dark:shadow-zinc-700;
+}

@@ -1,4 +1,7 @@
-import '@/app/globals.css'
+import type { ReactNode } from 'react'
+
+import '@/app/globals.scss'
+import WorkspaceProvider from '@/app/workspace-provider'
 
 import { languages } from '@/lib/language'
 
@@ -6,23 +9,21 @@ export async function generateStaticParams() {
   return languages.map((lang) => ({ lang }))
 }
 
-export default function PublicRootLayout({
+export default async function PublicRootLayout({
   children,
   params: { lang },
 }: {
-  children: React.ReactNode
+  children: ReactNode
   params: {
     lang: string
   }
 }) {
   return (
     <html lang={lang}>
-      {/*
-        <head /> will contain the components returned by the nearest parent head.tsx.
-        Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
       <head />
-      <body>{children}</body>
+      <body>
+        <WorkspaceProvider lang={lang}>{children}</WorkspaceProvider>
+      </body>
     </html>
   )
 }
