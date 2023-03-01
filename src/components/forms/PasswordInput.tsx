@@ -31,7 +31,7 @@ export function PasswordInput({
       {label && (
         <label
           htmlFor={id || name}
-          className="block text-sm font-medium label-text-color"
+          className="block text-sm font-medium text-color-label"
         >
           {label}
         </label>
@@ -42,7 +42,7 @@ export function PasswordInput({
           name={name}
           id={id || name}
           placeholder={placeholder}
-          className={`block w-full sm:text-sm rounded-md shadow-sm pr-10 ${
+          className={`block w-full sm:text-sm rounded-md shadow-sm bg-white dark:bg-zinc-900 pr-10 ${
             hasError
               ? 'border-red-300 text-red-600 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
               : 'border-zinc-300 focus:ring-primary-500 focus:border-primary-500 dark:border-zinc-700'
@@ -52,12 +52,12 @@ export function PasswordInput({
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
           {visible ? (
             <EyeSlashIcon
-              className="h-5 w-5 dimmed-text-color"
+              className="h-5 w-5 text-color-dimmed"
               onClick={() => setVisible(false)}
             />
           ) : (
             <EyeIcon
-              className="h-5 w-5 dimmed-text-color"
+              className="h-5 w-5 text-color-dimmed"
               onClick={() => setVisible(true)}
             />
           )}
@@ -66,7 +66,7 @@ export function PasswordInput({
       {hasError ? (
         <p className="mt-2 text-sm text-red-500">{error}</p>
       ) : help ? (
-        <p className="mt-2 text-sm dimmed-text-color">{help}</p>
+        <p className="mt-2 text-sm text-color-dimmed">{help}</p>
       ) : (
         ''
       )}

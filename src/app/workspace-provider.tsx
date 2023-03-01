@@ -1,6 +1,5 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
 import type { Dispatch, ReactNode } from 'react'
 import {
   createContext,
@@ -10,14 +9,10 @@ import {
   useState,
 } from 'react'
 
+import { Lang } from '@/lib/language'
+
 import { getWorkspace } from '@/api/gateway/workspace'
 import { Workspace } from '@/api/schema/workspace'
-
-const WorkspaceContext = createContext<Workspace | null>(null)
-
-export function useWorkspaceContext() {
-  return useContext(WorkspaceContext)
-}
 
 export type WorkspaceState = Workspace | null
 
@@ -26,11 +21,22 @@ export type WorkspaceStoreAction = {
   payload: Workspace | null
 }
 
+const WorkspaceContext = createContext(
+  {} as {
+    state: WorkspaceState
+    dispatch: Dispatch<WorkspaceStoreAction>
+  }
+)
+
 function reducer(state: WorkspaceState, action: WorkspaceStoreAction) {
   switch (action.type) {
     case 'set':
       return action.payload
   }
+}
+
+export function useWorkspaceContext() {
+  return useContext(WorkspaceContext)
 }
 
 export function useWorkspaceStore(): [
@@ -51,35 +57,23 @@ export default function WorkspaceProvider({
   lang,
 }: {
   children: ReactNode
-  lang: string
+  lang: Lang
 }) {
-  const router = useRouter()
-  const pathname = usePathname()
   const [fetched, setFetched] = useState(false)
   const [state, dispatch] = useWorkspaceStore()
   useEffect(() => {
     getWorkspace({ lang })
       .then((res) => res.json())
       .then((data) => {
-        const welcomePagePath = `/${lang}/welcome`
-        if (data == null) {
-          if (pathname !== welcomePagePath) {
-            router.replace(welcomePagePath)
-          }
-        } else {
-          if (pathname === welcomePagePath) {
-            router.replace('/login')
-          }
-        }
         dispatch({ type: 'set', payload: data })
         setFetched(true)
       })
-  }, [dispatch, lang, pathname, router])
+  }, [dispatch, lang])
   if (!fetched) {
     return <Skeleton />
   }
   return (
-    <WorkspaceContext.Provider value={state}>
+    <WorkspaceContext.Provider value={{ state, dispatch }}>
       {children}
     </WorkspaceContext.Provider>
   )

@@ -2,8 +2,9 @@ import { match } from '@formatjs/intl-localematcher'
 import Negotiator, { Headers } from 'negotiator'
 import type { NextRequest } from 'next/server'
 
+export type Lang = 'en' | 'ja' | 'vi'
 export const defaultLanguage = 'en'
-export const languages: Array<string> = ['en', 'ja', 'vi']
+export const languages: Array<Lang> = ['en', 'ja', 'vi']
 
 export const languageCookieName = 'i18n'
 

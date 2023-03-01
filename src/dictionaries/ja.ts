@@ -1,5 +1,8 @@
 const dictionary = {
   submit: '送信',
+  email: 'メールアドレス',
+  password: 'パスワード',
+  login: 'ログイン',
   types: {
     workspace: {
       name: 'ワークスペース名',

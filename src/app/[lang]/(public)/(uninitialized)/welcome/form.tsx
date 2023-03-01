@@ -3,12 +3,15 @@
 import { FormData } from 'next/dist/compiled/@edge-runtime/primitives/fetch'
 import { useState } from 'react'
 
+import { useWorkspaceContext } from '@/app/workspace-provider'
+
 import { Button } from '@/components/buttons/Button'
 import { PasswordInput } from '@/components/forms/PasswordInput'
 import { TextInput } from '@/components/forms/TextInput'
 
 import { useForm } from '@/hooks/form'
 
+import { Lang } from '@/lib/language'
 import {
   validateAgentName,
   validateEmail,
@@ -20,7 +23,7 @@ import { initWorkspace } from '@/api/gateway/workspace'
 import { Workspace } from '@/api/schema/workspace'
 
 interface Props {
-  lang: string
+  lang: Lang
   dict: any
 }
 
@@ -52,6 +55,7 @@ export function WelcomeForm({ lang, dict }: Props) {
   })
   // set loading animation to submit button during submitting (disable click)
   const [submitting, setSubmitting] = useState(false)
+  const { dispatch: workspaceDispatcher } = useWorkspaceContext()
   const handleSubmit = async (values: FormData) => {
     if (submitting) return false
     setSubmitting(true)
@@ -65,9 +69,12 @@ export function WelcomeForm({ lang, dict }: Props) {
       })
       if (response.ok) {
         const workspace = (await response.json()) as Workspace
+        workspaceDispatcher({ type: 'set', payload: workspace })
+        // TODO show complete message and redirect to login page
       } else {
         // handle error
         const error = response.json()
+        // TODO show error message
       }
     } finally {
       setSubmitting(false)

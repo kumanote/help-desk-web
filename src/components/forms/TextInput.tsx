@@ -30,7 +30,7 @@ export function TextInput({
       {label && (
         <label
           htmlFor={id || name}
-          className="block text-sm font-medium label-text-color"
+          className="block text-sm font-medium text-color-label"
         >
           {label}
         </label>
@@ -41,7 +41,7 @@ export function TextInput({
           name={name}
           id={id || name}
           placeholder={placeholder}
-          className={`block w-full sm:text-sm rounded-md shadow-sm ${
+          className={`block w-full sm:text-sm rounded-md shadow-sm bg-color-base text-color-base ${
             hasError
               ? 'border-red-300 text-red-600 placeholder-red-300 focus:ring-red-500 focus:border-red-500 pr-10'
               : 'border-zinc-300 focus:ring-primary-500 focus:border-primary-500 dark:border-zinc-700'
@@ -57,7 +57,7 @@ export function TextInput({
       {hasError ? (
         <p className="mt-2 text-sm text-red-500">{error}</p>
       ) : help ? (
-        <p className="mt-2 text-sm dimmed-text-color">{help}</p>
+        <p className="mt-2 text-sm text-color-dimmed">{help}</p>
       ) : (
         ''
       )}

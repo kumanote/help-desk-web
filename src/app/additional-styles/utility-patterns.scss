@@ -1,21 +1,35 @@
 /* text colors */
-.title-text-color {
+.text-color-base {
   @apply text-gray-900 dark:text-gray-50;
 }
 
-.label-text-color {
+.text-color-label {
   @apply text-gray-700 dark:text-gray-200;
 }
 
-.text-color {
+.text-color-description {
   @apply text-gray-600 dark:text-gray-300;
 }
 
-.dimmed-text-color {
+.text-color-dimmed {
   @apply text-gray-400 dark:text-gray-600;
 }
 
 /* back ground colors */
-.sheet-bg-color {
+.bg-color-base {
+  @apply bg-white dark:bg-zinc-900;
+}
+
+.bg-color-sheet {
   @apply bg-white shadow dark:bg-zinc-900 dark:shadow-zinc-700;
+}
+
+/* basic border */
+.border-base {
+  @apply border border-zinc-300 dark:border-zinc-600;
+}
+
+/* container */
+.container {
+  @apply mx-auto max-w-md px-2 sm:max-w-3xl sm:px-4 lg:max-w-7xl lg:px-6;
 }

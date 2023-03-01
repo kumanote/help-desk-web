@@ -1,6 +1,7 @@
 import { API_BASE_URL } from '@/lib/constants'
+import { Lang } from '@/lib/language'
 
-export async function getWorkspace({ lang }: { lang: string }) {
+export async function getWorkspace({ lang }: { lang: Lang }) {
   return await fetch(`${API_BASE_URL}/workspace`, {
     method: 'GET',
     cache: 'no-store',
@@ -18,7 +19,7 @@ export async function initWorkspace({
   first_agent_password,
   first_agent_name,
 }: {
-  lang: string
+  lang: Lang
   workspace_name: string
   first_agent_email: string
   first_agent_password: string

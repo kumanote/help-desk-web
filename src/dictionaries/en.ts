@@ -1,5 +1,8 @@
 const dictionary = {
   submit: 'submit',
+  email: 'email',
+  password: 'password',
+  login: 'sign in',
   types: {
     workspace: {
       name: 'workspace name',
