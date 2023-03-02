@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { showNotification } from '@/app/notification-provider'
+
 import { Button } from '@/components/buttons/Button'
 import { PasswordInput } from '@/components/forms/PasswordInput'
 import { TextInput } from '@/components/forms/TextInput'
@@ -38,7 +40,12 @@ export function LoginForm({ lang: _, dict }: Props) {
     if (submitting) return false
     setSubmitting(true)
     try {
-      window.alert(JSON.stringify(values))
+      showNotification({
+        type: 'error',
+        title: 'test',
+        message: values.username,
+        autoClose: 1000,
+      })
     } finally {
       setSubmitting(false)
     }

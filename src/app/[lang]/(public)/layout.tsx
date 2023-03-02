@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 import '@/app/globals.scss'
+import NotificationsProvider from '@/app/notification-provider'
 import RouteHandler from '@/app/route-handler'
 import WorkspaceProvider from '@/app/workspace-provider'
 
@@ -26,15 +27,17 @@ export default async function PublicRootLayout({
     <html lang={lang}>
       <head />
       <body className="bg-color-base">
-        <WorkspaceProvider lang={lang}>
-          <RouteHandler lang={lang}>
-            <div className="min-h-screen flex flex-col">
-              <Header lang={lang} />
-              {children}
-              <Footer />
-            </div>
-          </RouteHandler>
-        </WorkspaceProvider>
+        <NotificationsProvider>
+          <WorkspaceProvider lang={lang}>
+            <RouteHandler lang={lang}>
+              <div className="min-h-screen flex flex-col">
+                <Header lang={lang} />
+                {children}
+                <Footer />
+              </div>
+            </RouteHandler>
+          </WorkspaceProvider>
+        </NotificationsProvider>
       </body>
     </html>
   )
