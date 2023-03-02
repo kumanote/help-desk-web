@@ -68,6 +68,9 @@ export default function WorkspaceProvider({
         dispatch({ type: 'set', payload: data })
         setFetched(true)
       })
+      .catch(() => {
+        throw new Error('failed to fetch workspace data')
+      })
   }, [dispatch, lang])
   if (!fetched) return <Skeleton />
   return (
