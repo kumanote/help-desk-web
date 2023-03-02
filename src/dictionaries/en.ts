@@ -16,8 +16,10 @@ const dictionary = {
       email: 'root user email address',
       password: 'root user password',
     },
+    initialized: 'Your workspace has been initialized successfully!',
   },
   validations: {
+    network: 'Could not connect to the server properly. Please try again.',
     required: 'This field is required.',
     too_short: 'Provide this field at least {0} characters.',
     too_long: 'Provide this field within {0} characters.',

@@ -115,13 +115,13 @@ function NotificationItem({
             <div className="flex-shrink-0">
               <NotificationItemIcon type={notification.type} />
             </div>
-            <div className="ml-3 w-0 flex-1 pt-0.5 text-sm font-medium">
+            <div className="ml-3 w-0 flex-1 pt-0.5 text-sm font-medium space-y-1">
               {notification.title && (
                 <p className="text-sm font-medium text-color-base">
                   {notification.title}
                 </p>
               )}
-              <p className="mt-1 text-sm text-color-description">
+              <p className="text-sm text-color-description">
                 {notification.message}
               </p>
             </div>

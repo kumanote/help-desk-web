@@ -1,8 +1,10 @@
 'use client'
 
 import { FormData } from 'next/dist/compiled/@edge-runtime/primitives/fetch'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { showNotification } from '@/app/notification-provider'
 import { useWorkspaceContext } from '@/app/workspace-provider'
 
 import { Button } from '@/components/buttons/Button'
@@ -20,7 +22,6 @@ import {
 } from '@/lib/validator'
 
 import { initWorkspace } from '@/api/gateway/workspace'
-import { Workspace } from '@/api/schema/workspace'
 
 interface Props {
   lang: Lang
@@ -35,6 +36,7 @@ interface FormData {
 }
 
 export function WelcomeForm({ lang, dict }: Props) {
+  const router = useRouter()
   const form = useForm<FormData>({
     initialValues: {
       workspaceName: '',
@@ -68,14 +70,37 @@ export function WelcomeForm({ lang, dict }: Props) {
         first_agent_name: values.firstAgentName,
       })
       if (response.ok) {
-        const workspace = (await response.json()) as Workspace
-        workspaceDispatcher({ type: 'set', payload: workspace })
-        // TODO show complete message and redirect to login page
+        workspaceDispatcher({ type: 'set', payload: response.ok })
+        showNotification({
+          type: 'success',
+          message: dict.welcome.initialized,
+          autoClose: 5000,
+        })
+        router.push(`/${lang}/login`)
       } else {
         // handle error
-        const error = response.json()
-        // TODO show error message
+        const message = response.err?.error?.reasons.map((reason, index) => {
+          return (
+            <>
+              {index > 0 && <br />}
+              <span>{reason}</span>
+            </>
+          )
+        })
+        if (message) {
+          showNotification({
+            type: 'error',
+            message,
+            autoClose: false,
+          })
+        }
       }
+    } catch {
+      showNotification({
+        type: 'error',
+        message: dict.validations.network,
+        autoClose: false,
+      })
     } finally {
       setSubmitting(false)
     }

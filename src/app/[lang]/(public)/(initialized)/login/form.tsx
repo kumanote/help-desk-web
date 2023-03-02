@@ -12,6 +12,8 @@ import { useForm } from '@/hooks/form'
 
 import { Lang } from '@/lib/language'
 
+import { login } from '@/api/gateway/auth'
+
 interface Props {
   lang: Lang
   dict: any
@@ -22,7 +24,7 @@ interface FormData {
   password: string
 }
 
-export function LoginForm({ lang: _, dict }: Props) {
+export function LoginForm({ lang, dict }: Props) {
   const form = useForm<FormData>({
     initialValues: {
       username: '',
@@ -40,10 +42,37 @@ export function LoginForm({ lang: _, dict }: Props) {
     if (submitting) return false
     setSubmitting(true)
     try {
+      const response = await login({
+        lang,
+        username: values.username,
+        password: values.password,
+      })
+      if (response.ok) {
+        const accessToken = response.ok.access_token
+        console.log(accessToken)
+      } else {
+        // handle error
+        const message = response.err?.error?.reasons.map((reason, index) => {
+          return (
+            <>
+              {index > 0 && <br />}
+              <span>{reason}</span>
+            </>
+          )
+        })
+        if (message) {
+          showNotification({
+            type: 'error',
+            message,
+            autoClose: false,
+          })
+        }
+        return false
+      }
+    } catch {
       showNotification({
         type: 'error',
-        title: 'test',
-        message: values.username,
+        message: dict.validations.network,
         autoClose: false,
       })
     } finally {

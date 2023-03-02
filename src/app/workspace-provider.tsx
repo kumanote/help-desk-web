@@ -62,15 +62,14 @@ export default function WorkspaceProvider({
   const [fetched, setFetched] = useState(false)
   const [state, dispatch] = useWorkspaceStore()
   useEffect(() => {
-    getWorkspace({ lang })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: 'set', payload: data })
+    getWorkspace({ lang }).then((response) => {
+      if (response.ok || response.ok === null) {
+        dispatch({ type: 'set', payload: response.ok })
         setFetched(true)
-      })
-      .catch(() => {
+      } else if (response.err) {
         throw new Error('failed to fetch workspace data')
-      })
+      }
+    })
   }, [dispatch, lang])
   if (!fetched) return <Skeleton />
   return (
