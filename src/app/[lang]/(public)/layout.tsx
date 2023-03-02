@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 import '@/app/globals.scss'
+import RouteHandler from '@/app/route-handler'
 import WorkspaceProvider from '@/app/workspace-provider'
 
 import { Lang, languages } from '@/lib/language'
@@ -26,11 +27,13 @@ export default async function PublicRootLayout({
       <head />
       <body className="bg-color-base">
         <WorkspaceProvider lang={lang}>
-          <div className="min-h-screen flex flex-col">
-            <Header lang={lang} />
-            {children}
-            <Footer />
-          </div>
+          <RouteHandler lang={lang}>
+            <div className="min-h-screen flex flex-col">
+              <Header lang={lang} />
+              {children}
+              <Footer />
+            </div>
+          </RouteHandler>
         </WorkspaceProvider>
       </body>
     </html>

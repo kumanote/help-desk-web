@@ -54,7 +54,7 @@ export function LangSwitcher({ lang }: Props) {
       {({ open }) => (
         <>
           <div className="relative">
-            <Listbox.Button className="relative w-full cursor-default rounded-full border-base text-left focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 sm:text-sm">
+            <Listbox.Button className="relative w-full cursor-default rounded-full ring-1 ring-zinc-900/20 backdrop-blur dark:ring-white/50">
               <span className="flex items-center">
                 <LangIcon
                   lang={lang}

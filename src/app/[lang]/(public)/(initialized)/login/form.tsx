@@ -31,7 +31,7 @@ export function LoginForm({ lang: _, dict }: Props) {
       password: (value) => (!value ? dict.validations.required : null),
     },
     validateInputOnChange: false,
-    validateInputOnBlur: true,
+    validateInputOnBlur: false,
   })
   const [submitting, setSubmitting] = useState(false)
   const handleSubmit = async (values: FormData) => {

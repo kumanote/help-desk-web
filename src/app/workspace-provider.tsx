@@ -69,9 +69,7 @@ export default function WorkspaceProvider({
         setFetched(true)
       })
   }, [dispatch, lang])
-  if (!fetched) {
-    return <Skeleton />
-  }
+  if (!fetched) return <Skeleton />
   return (
     <WorkspaceContext.Provider value={{ state, dispatch }}>
       {children}
