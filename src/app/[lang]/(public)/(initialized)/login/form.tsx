@@ -44,7 +44,7 @@ export function LoginForm({ lang: _, dict }: Props) {
         type: 'error',
         title: 'test',
         message: values.username,
-        autoClose: 1000,
+        autoClose: false,
       })
     } finally {
       setSubmitting(false)

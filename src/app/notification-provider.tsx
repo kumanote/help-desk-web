@@ -109,7 +109,7 @@ function NotificationItem({
       leaveFrom="opacity-100 sm:translate-x-0"
       leaveTo="opacity-0 sm:translate-x-1/2"
     >
-      <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+      <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-color-base shadow-lg dark:shadow-zinc-700 ring-1 ring-black dark:ring-zinc-600 ring-opacity-5">
         <div className="p-4">
           <div className="flex items-start">
             <div className="flex-shrink-0">
@@ -121,14 +121,14 @@ function NotificationItem({
                   {notification.title}
                 </p>
               )}
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-color-description">
                 {notification.message}
               </p>
             </div>
             <div className="ml-4 flex flex-shrink-0">
               <button
                 type="button"
-                className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                className="inline-flex rounded-md bg-color-base text-color-dimmed hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                 onClick={() => setIsShowing(false)}
               >
                 <XMarkIcon className="h-5 w-5"></XMarkIcon>

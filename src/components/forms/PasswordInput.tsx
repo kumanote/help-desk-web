@@ -42,7 +42,7 @@ export function PasswordInput({
           name={name}
           id={id || name}
           placeholder={placeholder}
-          className={`block w-full sm:text-sm rounded-md shadow-sm bg-white dark:bg-zinc-900 pr-10 ${
+          className={`block w-full sm:text-sm rounded-md shadow-sm bg-color-base text-color-base pr-10 ${
             hasError
               ? 'border-red-300 text-red-600 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
               : 'border-zinc-300 focus:ring-primary-500 focus:border-primary-500 dark:border-zinc-700'
