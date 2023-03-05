@@ -15,3 +15,12 @@ This project is work in progress and subject to frequent changes.
 - [Notification system](src/app/notification-provider.tsx)
 - [form hook](src/hooks/form.ts)
 - [form components](src/components/forms/)
+
+# Hot to start dev server
+
+```bash
+% git clone https://github.com/kumanote/help-desk-web.git
+% cd help-desk-web
+% pnpm install
+% pnpm dev
+```

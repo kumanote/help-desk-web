@@ -96,3 +96,6 @@ sw.*
 
 # static resources
 public
+
+# pnpm lock
+pnpm-lock.yaml
