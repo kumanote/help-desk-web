@@ -3,8 +3,11 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { setAuthTokenCookie } from '@/app/auth-provider'
-import { showNotification } from '@/app/notification-provider'
+import { setAuthTokenCookie, useAuthContext } from '@/app/auth-provider'
+import {
+  cleanNotifications,
+  showNotification,
+} from '@/app/notification-provider'
 
 import { Button } from '@/components/buttons/Button'
 import { PasswordInput } from '@/components/forms/PasswordInput'
@@ -14,7 +17,7 @@ import { useForm } from '@/hooks/form'
 
 import { Lang } from '@/lib/language'
 
-import { login } from '@/api/gateway/auth'
+import { getAuthorizedScopes, login } from '@/api/gateway/auth'
 
 interface Props {
   lang: Lang
@@ -41,6 +44,7 @@ export function LoginForm({ lang, dict }: Props) {
     validateInputOnBlur: false,
   })
   const [submitting, setSubmitting] = useState(false)
+  const { dispatch: authDispatcher } = useAuthContext()
   const handleSubmit = async (values: FormData) => {
     if (submitting) return false
     setSubmitting(true)
@@ -53,7 +57,21 @@ export function LoginForm({ lang, dict }: Props) {
       if (response.ok) {
         const accessToken = response.ok.access_token
         setAuthTokenCookie({ accessToken })
-        router.push(`/${lang}/dashboard`)
+        const authResponse = await getAuthorizedScopes({
+          lang,
+          access_token: accessToken,
+        })
+        if (authResponse.ok) {
+          authDispatcher({ type: 'set', payload: authResponse.ok })
+          cleanNotifications()
+          router.push(`/${lang}/dashboard`)
+        } else {
+          showNotification({
+            type: 'error',
+            message: dict.validations.network,
+            autoClose: false,
+          })
+        }
       } else {
         // handle error
         const message = response.err?.error?.reasons.map((reason, index) => {
