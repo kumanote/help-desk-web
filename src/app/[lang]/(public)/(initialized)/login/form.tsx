@@ -1,7 +1,9 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { setAuthTokenCookie } from '@/app/auth-provider'
 import { showNotification } from '@/app/notification-provider'
 
 import { Button } from '@/components/buttons/Button'
@@ -25,6 +27,7 @@ interface FormData {
 }
 
 export function LoginForm({ lang, dict }: Props) {
+  const router = useRouter()
   const form = useForm<FormData>({
     initialValues: {
       username: '',
@@ -49,7 +52,8 @@ export function LoginForm({ lang, dict }: Props) {
       })
       if (response.ok) {
         const accessToken = response.ok.access_token
-        console.log(accessToken)
+        setAuthTokenCookie({ accessToken })
+        router.push(`/${lang}/dashboard`)
       } else {
         // handle error
         const message = response.err?.error?.reasons.map((reason, index) => {

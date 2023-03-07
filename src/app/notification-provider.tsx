@@ -23,6 +23,8 @@ import {
   useNotificationsState,
 } from '@/hooks/notification'
 
+import { GLOBAL_EVENT_NAMES } from '@/lib/constants'
+
 interface NotificationContextProps {
   notifications: Notification[]
   queue: Notification[]
@@ -100,7 +102,6 @@ function NotificationItem({
       appear={true}
       afterLeave={handleHide}
       show={isShowing}
-      key={notification.id}
       as={Fragment}
       enter="transform ease-out duration-300 transition"
       enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-1/2"
@@ -142,19 +143,22 @@ function NotificationItem({
 }
 
 export function showNotification(notification: Notification) {
-  const event = new CustomEvent<Notification>('notifications:show', {
-    detail: notification,
-  })
+  const event = new CustomEvent<Notification>(
+    GLOBAL_EVENT_NAMES.notifications.show,
+    {
+      detail: notification,
+    }
+  )
   window.dispatchEvent(event)
 }
 
 export function cleanNotifications() {
-  const event = new CustomEvent('notifications:clean')
+  const event = new CustomEvent(GLOBAL_EVENT_NAMES.notifications.clean)
   window.dispatchEvent(event)
 }
 
 export function cleanNotificationsQueue() {
-  const event = new CustomEvent('notifications:cleanQueue')
+  const event = new CustomEvent(GLOBAL_EVENT_NAMES.notifications.cleanQueue)
   window.dispatchEvent(event)
 }
 
@@ -181,42 +185,48 @@ export default function NotificationsProvider({
     typeof window !== 'undefined' ? useLayoutEffect : useEffect
   useIsomorphicEffect(() => {
     window.removeEventListener(
-      'notifications:show',
+      GLOBAL_EVENT_NAMES.notifications.show,
       showNotificationCustomEvent
     )
-    window.addEventListener('notifications:show', showNotificationCustomEvent)
+    window.addEventListener(
+      GLOBAL_EVENT_NAMES.notifications.show,
+      showNotificationCustomEvent
+    )
     window.removeEventListener(
-      'notifications:clean',
+      GLOBAL_EVENT_NAMES.notifications.clean,
       cleanNotificationsCustomEvent
     )
     window.addEventListener(
-      'notifications:clean',
+      GLOBAL_EVENT_NAMES.notifications.clean,
       cleanNotificationsCustomEvent
     )
     window.removeEventListener(
-      'notifications:cleanQueue',
+      GLOBAL_EVENT_NAMES.notifications.cleanQueue,
       cleanNotificationsQueueCustomEvent
     )
     window.addEventListener(
-      'notifications:cleanQueue',
+      GLOBAL_EVENT_NAMES.notifications.cleanQueue,
       cleanNotificationsQueueCustomEvent
     )
     return () => {
-      // window.removeEventListener('notifications:show', showNotificationCustomEvent);
       window.removeEventListener(
-        'notifications:clean',
+        GLOBAL_EVENT_NAMES.notifications.show,
+        showNotificationCustomEvent
+      )
+      window.removeEventListener(
+        GLOBAL_EVENT_NAMES.notifications.clean,
         cleanNotificationsCustomEvent
       )
       window.removeEventListener(
-        'notifications:cleanQueue',
+        GLOBAL_EVENT_NAMES.notifications.cleanQueue,
         cleanNotificationsQueueCustomEvent
       )
     }
   }, [])
 
-  const items = notifications.map((notification) => (
+  const items = notifications.map((notification, index) => (
     <NotificationItem
-      key={notification.id}
+      key={`${notification.id}-${index}`}
       notification={notification}
       onHide={hideNotification}
     />

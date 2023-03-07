@@ -1,9 +1,6 @@
 import type { ReactNode } from 'react'
 
-import '@/app/globals.scss'
-import NotificationsProvider from '@/app/notification-provider'
 import RouteHandler from '@/app/route-handler'
-import WorkspaceProvider from '@/app/workspace-provider'
 
 import { Lang, languages } from '@/lib/language'
 
@@ -24,21 +21,12 @@ export default async function PublicRootLayout({
   }
 }) {
   return (
-    <html lang={lang}>
-      <head />
-      <body className="bg-color-base">
-        <NotificationsProvider>
-          <WorkspaceProvider lang={lang}>
-            <RouteHandler lang={lang}>
-              <div className="min-h-screen flex flex-col">
-                <Header lang={lang} />
-                {children}
-                <Footer />
-              </div>
-            </RouteHandler>
-          </WorkspaceProvider>
-        </NotificationsProvider>
-      </body>
-    </html>
+    <RouteHandler lang={lang} requireAuth={false}>
+      <div className="min-h-screen flex flex-col">
+        <Header lang={lang} />
+        {children}
+        <Footer />
+      </div>
+    </RouteHandler>
   )
 }

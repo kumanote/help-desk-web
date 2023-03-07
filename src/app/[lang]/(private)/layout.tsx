@@ -1,18 +1,25 @@
-import '@/app/globals.scss'
+import type { ReactNode } from 'react'
+
+import RouteHandler from '@/app/route-handler'
+
+import { Lang, languages } from '@/lib/language'
+
+export async function generateStaticParams() {
+  return languages.map((lang) => ({ lang }))
+}
 
 export default function PrivateRootLayout({
   children,
+  params: { lang },
 }: {
-  children: React.ReactNode
+  children: ReactNode
+  params: {
+    lang: Lang
+  }
 }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent head.tsx.
-        Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
-      <body>{children}</body>
-    </html>
+    <RouteHandler lang={lang} requireAuth={true}>
+      <div>{children}</div>
+    </RouteHandler>
   )
 }
