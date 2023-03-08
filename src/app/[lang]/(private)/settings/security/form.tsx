@@ -3,7 +3,9 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { useAuthContext } from '@/app/auth-provider'
 import { useLangContext } from '@/app/lang-provider'
+import { showNotification } from '@/app/notification-provider'
 
 import { Button } from '@/components/buttons/Button'
 import { PasswordInput } from '@/components/forms/PasswordInput'
@@ -11,6 +13,8 @@ import { PasswordInput } from '@/components/forms/PasswordInput'
 import { useForm } from '@/hooks/form'
 
 import { validatePassword, validatePasswordConfirmation } from '@/lib/validator'
+
+import { changePassword } from '@/api/gateway/me'
 
 interface FormData {
   currentPassword: string
@@ -23,6 +27,7 @@ export function SecuritySettingsForm() {
   const langState = useLangContext()
   const lang = langState!.lang
   const dictionary = langState!.dictionary
+  const { state: authState } = useAuthContext()
   const form = useForm<FormData>({
     initialValues: {
       currentPassword: '',
@@ -48,7 +53,44 @@ export function SecuritySettingsForm() {
     if (submitting) return false
     setSubmitting(true)
     try {
-      // TODO
+      const accessToken = authState.data!.token
+      const response = await changePassword({
+        lang,
+        access_token: accessToken,
+        current_password: values.currentPassword,
+        new_password: values.newPassword,
+      })
+      if (response.ok) {
+        showNotification({
+          type: 'success',
+          message: dictionary.settings.change_password_succeeded,
+          autoClose: 5000,
+        })
+        form.reset()
+      } else {
+        // handle error
+        const message = response.err?.error?.reasons.map((reason, index) => {
+          return (
+            <>
+              {index > 0 && <br />}
+              <span>{reason}</span>
+            </>
+          )
+        })
+        if (message) {
+          showNotification({
+            type: 'error',
+            message,
+            autoClose: false,
+          })
+        }
+      }
+    } catch {
+      showNotification({
+        type: 'error',
+        message: dictionary.validations.network,
+        autoClose: false,
+      })
     } finally {
       setSubmitting(false)
     }

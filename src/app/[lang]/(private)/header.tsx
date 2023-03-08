@@ -29,9 +29,7 @@ export function Header() {
     event.preventDefault()
     router.push(`/${lang}/login`)
     const accessToken = authState.data!.token
-    logout({ lang, access_token: accessToken }).then((resp) => {
-      console.log(resp.ok)
-    })
+    await logout({ lang, access_token: accessToken })
     deleteAuthTokenCookie()
     authDispatcher({ type: 'clear' })
   }

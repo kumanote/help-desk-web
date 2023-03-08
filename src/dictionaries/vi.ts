@@ -42,6 +42,8 @@ const dictionary = {
   },
   settings: {
     title: 'account settings',
+    change_password_succeeded:
+      'New password has been saved completely successfully.',
   },
   welcome: {
     title: 'chào mừng',

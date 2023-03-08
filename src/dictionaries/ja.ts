@@ -42,6 +42,7 @@ const dictionary = {
   },
   settings: {
     title: 'アカウント設定',
+    change_password_succeeded: 'パスワードが変更されました。',
   },
   welcome: {
     title: 'welcome',
