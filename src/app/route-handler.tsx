@@ -4,11 +4,11 @@ import { usePathname, useRouter } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
 
 import { useAuthContext } from '@/app/auth-provider'
+import { useLangContext } from '@/app/lang-provider'
 import { useWorkspaceContext } from '@/app/workspace-provider'
 
-import { Lang } from '@/lib/language'
-
 function Skeleton() {
+  // TODO nice custom loading animation.
   return (
     <div className="fixed inset-0 bg-zinc-900 bg-opacity-25 z-50 dark:bg-opacity-75"></div>
   )
@@ -16,13 +16,13 @@ function Skeleton() {
 
 export default function RouteHandler({
   children,
-  lang,
   requireAuth,
 }: {
   children: ReactNode
-  lang: Lang
   requireAuth: boolean
 }) {
+  const langState = useLangContext()
+  const lang = langState!.lang
   const router = useRouter()
   const pathname = usePathname()
   const { state: workspace } = useWorkspaceContext()

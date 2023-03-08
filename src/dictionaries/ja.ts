@@ -3,10 +3,19 @@ const dictionary = {
   email: 'メールアドレス',
   password: 'パスワード',
   login: 'ログイン',
+  logout: 'ログアウト',
   types: {
     workspace: {
       name: 'ワークスペース名',
     },
+  },
+  navigations: {
+    dashboard: 'ダッシュボード',
+    inquiry: 'お問合せ',
+    faq: 'FAQ',
+    announcement: 'お知らせ',
+    workspace: 'システム設定',
+    profile: 'プロフィール',
   },
   welcome: {
     title: 'welcome',

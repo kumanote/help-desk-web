@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { setAuthTokenCookie, useAuthContext } from '@/app/auth-provider'
+import { useLangContext } from '@/app/lang-provider'
 import {
   cleanNotifications,
   showNotification,
@@ -15,22 +16,18 @@ import { TextInput } from '@/components/forms/TextInput'
 
 import { useForm } from '@/hooks/form'
 
-import { Lang } from '@/lib/language'
-
 import { getAuthorizedScopes, login } from '@/api/gateway/auth'
-
-interface Props {
-  lang: Lang
-  dict: any
-}
 
 interface FormData {
   username: string
   password: string
 }
 
-export function LoginForm({ lang, dict }: Props) {
+export function LoginForm() {
   const router = useRouter()
+  const langState = useLangContext()
+  const lang = langState!.lang
+  const dict = langState!.dictionary
   const form = useForm<FormData>({
     initialValues: {
       username: '',
@@ -62,7 +59,13 @@ export function LoginForm({ lang, dict }: Props) {
           access_token: accessToken,
         })
         if (authResponse.ok) {
-          authDispatcher({ type: 'set', payload: authResponse.ok })
+          authDispatcher({
+            type: 'set',
+            payload: {
+              scopes: authResponse.ok,
+              token: accessToken,
+            },
+          })
           cleanNotifications()
           router.push(`/${lang}/dashboard`)
         } else {

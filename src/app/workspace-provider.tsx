@@ -3,7 +3,7 @@
 import type { Dispatch, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 
-import { Lang } from '@/lib/language'
+import { useLangContext } from '@/app/lang-provider'
 
 import { getWorkspace } from '@/api/gateway/workspace'
 import { Workspace } from '@/api/schema/workspace'
@@ -51,11 +51,11 @@ export function useWorkspaceStore(): [
 
 export default function WorkspaceProvider({
   children,
-  lang,
 }: {
   children: ReactNode
-  lang: Lang
 }) {
+  const langState = useLangContext()
+  const lang = langState!.lang
   const [state, dispatch] = useWorkspaceStore()
   useEffect(() => {
     getWorkspace({ lang }).then((response) => {

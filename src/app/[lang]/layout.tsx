@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react'
 
+import { getDictionary } from '@/app/[lang]/dictionaries'
 import AuthProvider from '@/app/auth-provider'
 import '@/app/globals.scss'
+import LangProvider from '@/app/lang-provider'
 import NotificationsProvider from '@/app/notification-provider'
 import WorkspaceProvider from '@/app/workspace-provider'
 
@@ -20,15 +22,18 @@ export default async function PublicRootLayout({
     lang: Lang
   }
 }) {
+  const dictionary = await getDictionary(lang)
   return (
     <html lang={lang}>
       <head />
       <body className="bg-color-base">
-        <NotificationsProvider>
-          <WorkspaceProvider lang={lang}>
-            <AuthProvider lang={lang}>{children}</AuthProvider>
-          </WorkspaceProvider>
-        </NotificationsProvider>
+        <LangProvider lang={lang} dictionary={dictionary}>
+          <NotificationsProvider>
+            <WorkspaceProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </WorkspaceProvider>
+          </NotificationsProvider>
+        </LangProvider>
       </body>
     </html>
   )

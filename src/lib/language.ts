@@ -2,11 +2,13 @@ import { match } from '@formatjs/intl-localematcher'
 import Negotiator, { Headers } from 'negotiator'
 import type { NextRequest } from 'next/server'
 
+import { COOKIES } from '@/lib/constants'
+
 export type Lang = 'en' | 'ja' | 'vi'
 export const defaultLanguage = 'en'
 export const languages: Array<Lang> = ['en', 'ja', 'vi']
 
-export const languageCookieName = 'i18n'
+export const languageCookieName = COOKIES.lang.name
 
 /**
  * parse http request header and detect language

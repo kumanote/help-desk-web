@@ -1,24 +1,34 @@
 'use client'
 
-import { getCookie, setCookie } from 'cookies-next'
+import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import type { Dispatch, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 
+import { useLangContext } from '@/app/lang-provider'
+
 import { COOKIES } from '@/lib/constants'
-import { Lang } from '@/lib/language'
 
 import { getAuthorizedScopes } from '@/api/gateway/auth'
 import { Scope } from '@/api/schema/scope'
 
+interface AuthStateData {
+  scopes: Array<Scope>
+  token: string
+}
+
 export type AuthState = {
-  data: Array<Scope> | null
+  data: AuthStateData | null
   fetched: boolean
 }
 
-export type AuthStoreAction = {
-  type: 'set'
-  payload: Array<Scope> | null
-}
+export type AuthStoreAction =
+  | {
+      type: 'set'
+      payload: AuthStateData | null
+    }
+  | {
+      type: 'clear'
+    }
 
 const AuthContext = createContext(
   {} as {
@@ -32,6 +42,12 @@ function reducer(state: AuthState, action: AuthStoreAction) {
     case 'set':
       return {
         data: action.payload,
+        fetched: true,
+      }
+    case 'clear':
+      // clear data, keep fetched flag true
+      return {
+        data: null,
         fetched: true,
       }
   }
@@ -52,28 +68,35 @@ export function setAuthTokenCookie({ accessToken }: { accessToken: string }) {
   setCookie(COOKIES.auth.token.name, accessToken, COOKIES.auth.token.options)
 }
 
-export default function AuthProvider({
-  children,
-  lang,
-}: {
-  children: ReactNode
-  lang: Lang
-}) {
+export function deleteAuthTokenCookie() {
+  deleteCookie(COOKIES.auth.token.name)
+}
+
+export default function AuthProvider({ children }: { children: ReactNode }) {
+  const langState = useLangContext()
+  const lang = langState!.lang
   const [state, dispatch] = useAuthStore()
   const accessToken = getCookie(COOKIES.auth.token.name)
   useEffect(() => {
     if (accessToken) {
-      getAuthorizedScopes({ lang, access_token: String(accessToken) }).then(
-        (response) => {
-          if (response.ok || response.ok === null) {
-            dispatch({ type: 'set', payload: response.ok })
-          } else {
-            throw new Error('failed to fetch authorized scope data')
-          }
+      const token = String(accessToken)
+      getAuthorizedScopes({ lang, access_token: token }).then((response) => {
+        if (response.ok) {
+          dispatch({
+            type: 'set',
+            payload: {
+              scopes: response.ok,
+              token,
+            },
+          })
+        } else if (response.ok === null) {
+          dispatch({ type: 'clear' })
+        } else {
+          throw new Error('failed to fetch authorized scope data')
         }
-      )
+      })
     } else {
-      dispatch({ type: 'set', payload: null })
+      dispatch({ type: 'clear' })
     }
   }, [accessToken, dispatch, lang])
   return (

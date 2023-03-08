@@ -4,6 +4,7 @@ import { FormData } from 'next/dist/compiled/@edge-runtime/primitives/fetch'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { useLangContext } from '@/app/lang-provider'
 import { showNotification } from '@/app/notification-provider'
 import { useWorkspaceContext } from '@/app/workspace-provider'
 
@@ -13,7 +14,6 @@ import { TextInput } from '@/components/forms/TextInput'
 
 import { useForm } from '@/hooks/form'
 
-import { Lang } from '@/lib/language'
 import {
   validateAgentName,
   validateEmail,
@@ -23,11 +23,6 @@ import {
 
 import { initWorkspace } from '@/api/gateway/workspace'
 
-interface Props {
-  lang: Lang
-  dict: any
-}
-
 interface FormData {
   workspaceName: string
   firstAgentName: string
@@ -35,8 +30,11 @@ interface FormData {
   firstAgentPassword: string
 }
 
-export function WelcomeForm({ lang, dict }: Props) {
+export function WelcomeForm() {
   const router = useRouter()
+  const langState = useLangContext()
+  const lang = langState!.lang
+  const dict = langState!.dictionary
   const form = useForm<FormData>({
     initialValues: {
       workspaceName: '',

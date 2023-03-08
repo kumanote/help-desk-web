@@ -16,6 +16,9 @@ export const COOKIES = {
       },
     },
   },
+  lang: {
+    name: 'help-desk.i18n',
+  },
 }
 
 export const GLOBAL_EVENT_NAMES = {

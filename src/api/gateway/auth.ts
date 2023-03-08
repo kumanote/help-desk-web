@@ -38,6 +38,32 @@ export async function login({
   }
 }
 
+export async function logout({
+  lang,
+  access_token,
+}: {
+  lang: Lang
+  access_token: string
+}): Promise<ResponseResult<string, ErrorResponse>> {
+  const response = await fetch(`${API_BASE_URL}/auth`, {
+    method: 'DELETE',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+  })
+  if (response.ok) {
+    return {
+      ok: await response.text(),
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
 export async function getAuthorizedScopes({
   lang,
   access_token,

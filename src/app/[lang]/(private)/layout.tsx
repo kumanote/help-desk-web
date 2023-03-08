@@ -2,24 +2,28 @@ import type { ReactNode } from 'react'
 
 import RouteHandler from '@/app/route-handler'
 
-import { Lang, languages } from '@/lib/language'
+import AppProvider from './app-provider'
+import { Header } from './header'
+import { Sidebar } from './sidebar'
 
-export async function generateStaticParams() {
-  return languages.map((lang) => ({ lang }))
-}
-
-export default function PrivateRootLayout({
+export default async function PrivateRootLayout({
   children,
-  params: { lang },
 }: {
   children: ReactNode
-  params: {
-    lang: Lang
-  }
 }) {
   return (
-    <RouteHandler lang={lang} requireAuth={true}>
-      <div>{children}</div>
+    <RouteHandler requireAuth={true}>
+      <AppProvider>
+        <div className="h-screen overflow-hidden flex">
+          <Sidebar />
+          <div className="flex flex-1 flex-col overflow-hidden">
+            <Header />
+            <div className="flex flex-1 items-stretch overflow-hidden">
+              {children}
+            </div>
+          </div>
+        </div>
+      </AppProvider>
     </RouteHandler>
   )
 }
