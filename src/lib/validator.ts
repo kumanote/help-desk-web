@@ -106,3 +106,21 @@ export function validatePassword({
   }
   return null
 }
+
+export function validatePasswordConfirmation({
+  confirmation,
+  password,
+  dict,
+}: {
+  confirmation: string
+  password: string
+  dict: any
+}): ValidationResult {
+  if (!confirmation) {
+    return dict.validations.required
+  }
+  if (confirmation !== password) {
+    return dict.validations.password_confirmation_must_match
+  }
+  return null
+}

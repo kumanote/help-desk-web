@@ -1,9 +1,18 @@
 const dictionary = {
   submit: '送信',
+  save: '保存',
+  reset: 'リセット',
+  close: '閉じる',
+  back: '戻る',
+  remove: '削除',
   email: 'メールアドレス',
   password: 'パスワード',
+  current_password: '現在のパスワード',
+  new_password: '新しいパスワード',
+  password_for_confirmation: '新しいパスワード確認用',
   login: 'ログイン',
   logout: 'ログアウト',
+  menu: 'メニュー',
   types: {
     workspace: {
       name: 'ワークスペース名',
@@ -16,6 +25,23 @@ const dictionary = {
     announcement: 'お知らせ',
     workspace: 'システム設定',
     profile: 'プロフィール',
+    settings: {
+      profile: {
+        title: 'プロフィール',
+        description: 'プロフィールを変更できます。',
+      },
+      security: {
+        title: 'セキュリティ',
+        description: 'パスワードを変更できます。',
+      },
+      language: {
+        title: '言語',
+        description: '表示用の言語を切り替えられます。',
+      },
+    },
+  },
+  settings: {
+    title: 'アカウント設定',
   },
   welcome: {
     title: 'welcome',
@@ -37,6 +63,7 @@ const dictionary = {
     invalid_email_format: 'メールアドレスの形式が正しくありません。',
     invalid_password_format:
       'パスワードは半角英数記号を使い6〜32文字の間で入力して下さい。',
+    password_confirmation_must_match: '確認用のパスワードが一致しません。',
   },
 }
 

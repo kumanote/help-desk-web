@@ -12,7 +12,7 @@
 }
 
 .text-color-dimmed {
-  @apply text-gray-400 dark:text-gray-600;
+  @apply text-gray-400 dark:text-gray-500;
 }
 
 /* back ground colors */
@@ -21,7 +21,7 @@
 }
 
 .bg-color-sheet {
-  @apply bg-white shadow dark:bg-zinc-900 dark:shadow-zinc-700;
+  @apply bg-white shadow-lg dark:bg-zinc-900 dark:shadow-zinc-700;
 }
 
 /* basic border */

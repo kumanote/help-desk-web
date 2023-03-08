@@ -37,7 +37,7 @@ export function Header() {
   }
   return (
     <header className="w-full">
-      <div className="relative z-10 flex h-12 flex-shrink-0 border-b border-zinc-200 dark:border-zinc-700 bg-transparent shadow-sm">
+      <div className="relative z-40 flex h-12 flex-shrink-0 border-b border-zinc-200 dark:border-zinc-700 bg-transparent shadow-sm">
         <button
           type="button"
           className="border-r border-zinc-200 dark:border-zinc-700 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 md:hidden"
@@ -86,7 +86,7 @@ export function Header() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 bg-color-base shadow-lg dark:shadow-zinc-700 ring-1 ring-black dark:ring-zinc-600 ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute right-0 z-40 mt-2 w-48 origin-top-right rounded-md py-1 bg-color-base shadow-lg dark:shadow-zinc-700 ring-1 ring-black dark:ring-zinc-600 ring-opacity-5 focus:outline-none">
                   {appState.profileNavigationItems.map((item) => (
                     <Menu.Item key={item.name}>
                       {({ active }) => (

@@ -18,9 +18,9 @@ export default async function PrivateRootLayout({
           <Sidebar />
           <div className="flex flex-1 flex-col overflow-hidden">
             <Header />
-            <div className="flex flex-1 items-stretch overflow-hidden">
+            <main className="flex flex-1 items-stretch overflow-hidden">
               {children}
-            </div>
+            </main>
           </div>
         </div>
       </AppProvider>

@@ -1,9 +1,18 @@
 const dictionary = {
   submit: 'submit',
+  save: 'save',
+  reset: 'reset',
+  close: 'close',
+  back: 'back',
+  remove: 'remove',
   email: 'email',
   password: 'password',
+  current_password: 'current password',
+  new_password: 'new password',
+  password_for_confirmation: 'password for confirmation',
   login: 'sign in',
   logout: 'sign out',
+  menu: 'menu',
   types: {
     workspace: {
       name: 'workspace name',
@@ -16,6 +25,23 @@ const dictionary = {
     announcement: 'announcement',
     workspace: 'system settings',
     profile: 'profile',
+    settings: {
+      profile: {
+        title: 'profile',
+        description: 'You can edit your profile.',
+      },
+      security: {
+        title: 'security',
+        description: 'You can edit your password.',
+      },
+      language: {
+        title: 'language',
+        description: 'You can switch languages.',
+      },
+    },
+  },
+  settings: {
+    title: 'account settings',
   },
   welcome: {
     title: 'chào mừng',
@@ -35,6 +61,8 @@ const dictionary = {
     invalid_email_format: 'Email address is not in valid format.',
     invalid_password_format:
       'Password mut be 6 to 32 letters using half-width English letters, numbers and symbols.',
+    password_confirmation_must_match:
+      'Password for confirmation dose not match',
   },
 }
 
