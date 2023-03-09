@@ -29,16 +29,18 @@ export function Sidebar() {
                   key={item.name}
                   href={item.href}
                   className={clsx(
-                    item.current ? 'bg-primary-200' : 'hover:bg-primary-200',
-                    'inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg'
+                    item.current
+                      ? 'bg-primary-200 dark:bg-primary-700'
+                      : 'hover:bg-primary-200 dark:hover:bg-primary-700',
+                    'group inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg'
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
                   <item.icon
                     className={clsx(
                       item.current
-                        ? 'text-primary-700'
-                        : 'text-gray-500 group-hover:text-primary-700',
+                        ? 'text-primary-700 dark:text-primary-200'
+                        : 'text-gray-500 group-hover:text-primary-700 dark:group-hover:text-primary-200',
                       'h-6 w-6'
                     )}
                     aria-hidden="true"
@@ -113,8 +115,8 @@ export function Sidebar() {
                           href={item.href}
                           className={clsx(
                             item.current
-                              ? 'bg-primary-200 text-primary-700'
-                              : 'text-gray-500 hover:bg-primary-200 hover:text-primary-700',
+                              ? 'bg-primary-200 text-primary-700 dark:bg-primary-700 dark:text-primary-200'
+                              : 'text-gray-500 hover:bg-primary-200 hover:text-primary-700 dark:hover:bg-primary-700 dark:hover:text-primary-200',
                             'group flex items-center rounded-md py-2 px-3 text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -122,7 +124,7 @@ export function Sidebar() {
                           <item.icon
                             className={clsx(
                               item.current
-                                ? 'text-primary-600'
+                                ? 'text-primary-600 dark:text-primary-400'
                                 : 'text-gray-400 dark:text-gray-600 group-hover:text-primary-600',
                               'mr-3 h-6 w-6'
                             )}
