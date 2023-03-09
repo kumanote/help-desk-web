@@ -1,3 +1,9 @@
+import { FaqItemsSearchForm } from './search-form'
+
 export default function FaqItemsPage() {
-  return <div></div>
+  return (
+    <div>
+      <FaqItemsSearchForm />
+    </div>
+  )
 }
