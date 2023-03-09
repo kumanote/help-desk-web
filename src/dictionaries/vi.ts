@@ -23,6 +23,13 @@ const dictionary = {
       name: 'name',
       email: 'email address',
     },
+    faq_settings: {
+      home_url: 'home url',
+      home_url_help:
+        'You can specify the URL for end users to return from FAQ site.',
+      supported_locales: 'languages',
+      supported_locales_help: 'You can set multiple languages for FAQ site.',
+    },
   },
   navigations: {
     dashboard: 'dashboard',
@@ -31,6 +38,20 @@ const dictionary = {
     announcement: 'announcement',
     workspace: 'system settings',
     profile: 'profile',
+    faq_features: {
+      item: {
+        title: 'Article',
+        description: 'You can edit FAQ articles.',
+      },
+      category: {
+        title: 'Category',
+        description: 'You can edit FAQ categories.',
+      },
+      admin: {
+        title: 'Admin',
+        description: 'You can manage FAQ system settings',
+      },
+    },
     settings: {
       profile: {
         title: 'profile',
@@ -45,6 +66,9 @@ const dictionary = {
         description: 'You can switch languages.',
       },
     },
+  },
+  faq: {
+    title: 'FAQ',
   },
   settings: {
     title: 'account settings',
@@ -73,6 +97,7 @@ const dictionary = {
       'Password mut be 6 to 32 letters using half-width English letters, numbers and symbols.',
     password_confirmation_must_match:
       'Password for confirmation dose not match',
+    invalid_url_format: 'URL is not in valid format.',
   },
 }
 

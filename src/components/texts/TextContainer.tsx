@@ -9,8 +9,10 @@ export function TextContainer({ text }: Props) {
       {lines.map((line, index) => {
         return (
           <>
-            <span>{line}</span>
-            {index !== lines.length - 1 && <br />}
+            <span key={index}>
+              {line}
+              {index !== lines.length - 1 && <br />}
+            </span>
           </>
         )
       })}

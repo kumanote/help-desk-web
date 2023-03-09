@@ -23,6 +23,13 @@ const dictionary = {
       name: '名前',
       email: 'メールアドレス',
     },
+    faq_settings: {
+      home_url: 'サービスURL',
+      home_url_help:
+        'エンドユーザーがFAQのサイトから戻る際のURLを指定できます。',
+      supported_locales: '使用する言語',
+      supported_locales_help: 'FAQのサイトで利用する言語を複数設定できます。',
+    },
   },
   navigations: {
     dashboard: 'ダッシュボード',
@@ -31,6 +38,20 @@ const dictionary = {
     announcement: 'お知らせ',
     workspace: 'システム設定',
     profile: 'プロフィール',
+    faq_features: {
+      item: {
+        title: '記事',
+        description: 'FAQの記事を編集できます。',
+      },
+      category: {
+        title: 'カテゴリ',
+        description: 'FAQのカテゴリを編集できます。',
+      },
+      admin: {
+        title: '管理',
+        description: 'FAQのシステム設定を管理できます。',
+      },
+    },
     settings: {
       profile: {
         title: 'プロフィール',
@@ -45,6 +66,9 @@ const dictionary = {
         description: '表示用の言語を切り替えられます。',
       },
     },
+  },
+  faq: {
+    title: 'FAQ',
   },
   settings: {
     title: 'アカウント設定',
@@ -72,6 +96,7 @@ const dictionary = {
     invalid_password_format:
       'パスワードは半角英数記号を使い6〜32文字の間で入力して下さい。',
     password_confirmation_must_match: '確認用のパスワードが一致しません。',
+    invalid_url_format: 'URLの形式が正しくありません。',
   },
 }
 
