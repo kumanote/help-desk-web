@@ -82,8 +82,11 @@ export function validateEmail({
   required: boolean
   dict: any
 }): ValidationResult {
-  if (required && !value) {
-    return dict.validations.required
+  if (!value) {
+    if (required) {
+      return dict.validations.required
+    }
+    return null
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
     return dict.validations.invalid_email_format
@@ -121,6 +124,31 @@ export function validatePasswordConfirmation({
   }
   if (confirmation !== password) {
     return dict.validations.password_confirmation_must_match
+  }
+  return null
+}
+
+export function validateUrl({
+  value,
+  required,
+  dict,
+}: {
+  value: string
+  required: boolean
+  dict: any
+}): ValidationResult {
+  if (!value) {
+    if (required) {
+      return dict.validations.required
+    }
+    return null
+  }
+  if (
+    !/https?:\/\/[-_.!~*'()a-zA-Z0-9;\/?:@&=+$,%#\u3000-\u30FE\u4E00-\u9FA0\uFF01-\uFFE3]+/g.test(
+      value
+    )
+  ) {
+    return dict.validations.invalid_email_format
   }
   return null
 }

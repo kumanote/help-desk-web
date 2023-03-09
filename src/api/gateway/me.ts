@@ -12,7 +12,7 @@ export async function getProfile({
   lang: Lang
   access_token: string
 }): Promise<ResponseResult<Agent, ErrorResponse>> {
-  const response = await fetch(`${API_BASE_URL}/agent/me`, {
+  const response = await fetch(`${API_BASE_URL}/agents/me`, {
     method: 'GET',
     cache: 'no-store',
     headers: {
@@ -47,7 +47,7 @@ export async function updateProfile({
     email,
     name,
   }
-  const response = await fetch(`${API_BASE_URL}/agent/me`, {
+  const response = await fetch(`${API_BASE_URL}/agents/me`, {
     method: 'PUT',
     cache: 'no-store',
     headers: {
@@ -83,7 +83,7 @@ export async function changePassword({
     current_password,
     new_password,
   }
-  const response = await fetch(`${API_BASE_URL}/agent/me/password`, {
+  const response = await fetch(`${API_BASE_URL}/agents/me/password`, {
     method: 'PUT',
     cache: 'no-store',
     headers: {
