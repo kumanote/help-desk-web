@@ -5,6 +5,8 @@ const dictionary = {
   close: '閉じる',
   back: '戻る',
   remove: '削除',
+  edit: '編集',
+  cancel: 'キャンセル',
   email: 'メールアドレス',
   password: 'パスワード',
   current_password: '現在のパスワード',
@@ -16,6 +18,10 @@ const dictionary = {
   types: {
     workspace: {
       name: 'ワークスペース名',
+    },
+    agent: {
+      name: '名前',
+      email: 'メールアドレス',
     },
   },
   navigations: {
@@ -42,6 +48,7 @@ const dictionary = {
   },
   settings: {
     title: 'アカウント設定',
+    update_profile_succeeded: 'プロフィール情報を保存しました。',
     change_password_succeeded: 'パスワードが変更されました。',
   },
   welcome: {

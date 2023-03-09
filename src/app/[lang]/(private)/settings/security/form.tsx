@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { useAuthContext } from '@/app/auth-provider'
@@ -23,7 +22,6 @@ interface FormData {
 }
 
 export function SecuritySettingsForm() {
-  const router = useRouter()
   const langState = useLangContext()
   const lang = langState!.lang
   const dictionary = langState!.dictionary

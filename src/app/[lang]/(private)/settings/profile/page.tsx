@@ -1,7 +1,5 @@
+import { ProfileSettingsForm } from './form'
+
 export default async function ProfilePage() {
-  return (
-    <>
-      <div>todo</div>
-    </>
-  )
+  return <ProfileSettingsForm />
 }

@@ -5,6 +5,8 @@ const dictionary = {
   close: 'close',
   back: 'back',
   remove: 'remove',
+  edit: 'edit',
+  cancel: 'cancel',
   email: 'email',
   password: 'password',
   current_password: 'current password',
@@ -16,6 +18,10 @@ const dictionary = {
   types: {
     workspace: {
       name: 'workspace name',
+    },
+    agent: {
+      name: 'name',
+      email: 'email address',
     },
   },
   navigations: {
@@ -42,6 +48,8 @@ const dictionary = {
   },
   settings: {
     title: 'account settings',
+    update_profile_succeeded:
+      'Profile information has been saved completely successfully.',
     change_password_succeeded:
       'New password has been saved completely successfully.',
   },
