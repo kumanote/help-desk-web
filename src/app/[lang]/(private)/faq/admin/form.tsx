@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import { useState } from 'react'
 import useSWR from 'swr'
 
@@ -8,6 +9,7 @@ import { useLangContext } from '@/app/lang-provider'
 import { showNotification } from '@/app/notification-provider'
 
 import { Button } from '@/components/buttons/Button'
+import { MultiSelect, MultiSelectOption } from '@/components/forms/MultiSelect'
 import { TextInput } from '@/components/forms/TextInput'
 import { Skeleton } from '@/components/skeletons/Skeleton'
 
@@ -17,9 +19,24 @@ import { validateUrl } from '@/lib/validator'
 
 import { getFaqSettings, updateFaqSettings } from '@/api/gateway/faq'
 
+class LocaleOption implements MultiSelectOption {
+  value: string
+  text: string
+  constructor(value: string, text: string) {
+    this.value = value
+    this.text = text
+  }
+  getId(): string | number {
+    return this.value
+  }
+  getLabel(): string {
+    return this.text
+  }
+}
+
 interface FormData {
   homeUrl: string
-  supportedLocales: Array<string>
+  supportedLocales: Array<LocaleOption>
 }
 
 function Heading({ dictionary }: { dictionary: any }) {
@@ -58,6 +75,10 @@ export function FaqAdminForm() {
     },
     { refreshInterval: 0 }
   )
+  const localeOptions = [
+    new LocaleOption('en_US', 'English (US)'),
+    new LocaleOption('ja_JP', '日本語'),
+  ]
   const form = useForm<FormData>({
     initialValues: {
       homeUrl: '',
@@ -76,7 +97,9 @@ export function FaqAdminForm() {
     form.setFieldValue('homeUrl', settings.home_url || '')
     form.setFieldValue(
       'supportedLocales',
-      settings.supported_locales.map((item) => item.value)
+      settings.supported_locales.map(
+        (item) => new LocaleOption(item.value, item.text)
+      )
     )
     setEditing(true)
   }
@@ -89,7 +112,7 @@ export function FaqAdminForm() {
         lang,
         access_token: accessToken,
         home_url: values.homeUrl ? values.homeUrl : null,
-        supported_locales: values.supportedLocales,
+        supported_locales: values.supportedLocales.map((item) => item.value),
       })
       if (response.ok) {
         showNotification({
@@ -141,6 +164,12 @@ export function FaqAdminForm() {
             {...form.getInputProps('homeUrl')}
             wrapperClassName="sm:col-span-2"
           />
+          <MultiSelect
+            options={localeOptions}
+            label={dictionary.types.faq_settings.supported_locales}
+            help={dictionary.types.faq_settings.supported_locales_help}
+            {...form.getInputProps('supportedLocales')}
+          />
         </div>
         <div className="flex gap-x-3 mt-6">
           <Button
@@ -176,6 +205,35 @@ export function FaqAdminForm() {
                 <Skeleton className="h-2" />
               ) : (
                 settings.home_url || '-'
+              )}
+            </div>
+          </div>
+          <div className="sm:col-span-2">
+            <div className="text-sm font-medium text-color-label">
+              {dictionary.types.faq_settings.supported_locales}
+            </div>
+            <div className="mt-1 text-base font-medium text-color-base">
+              {!settings ? (
+                <Skeleton className="h-2" />
+              ) : !settings.supported_locales ||
+                settings.supported_locales.length < 1 ? (
+                '-'
+              ) : (
+                settings.supported_locales.map((locale, index) => {
+                  return (
+                    <span
+                      key={locale.value}
+                      className={clsx(
+                        'inline-block items-center rounded-full px-3 py-0.5 text-sm font-medium bg-zinc-100 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 truncate',
+                        index < settings.supported_locales.length - 1
+                          ? 'mr-1'
+                          : ''
+                      )}
+                    >
+                      {locale.text}
+                    </span>
+                  )
+                })
               )}
             </div>
           </div>
