@@ -4,6 +4,7 @@ const dictionary = {
   reset: 'reset',
   close: 'close',
   back: 'back',
+  add: 'add',
   remove: 'remove',
   edit: 'edit',
   cancel: 'cancel',
@@ -14,6 +15,7 @@ const dictionary = {
   password_for_confirmation: 'password for confirmation',
   login: 'sign in',
   logout: 'sign out',
+  no_data_found: 'No data found',
   menu: 'menu',
   types: {
     workspace: {
@@ -46,6 +48,9 @@ const dictionary = {
       category: {
         title: 'Category',
         description: 'You can edit FAQ categories.',
+        search: {
+          title: 'FAQ categories',
+        },
       },
       admin: {
         title: 'Admin',

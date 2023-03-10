@@ -1,3 +1,5 @@
+import { FaqCategorySearch } from './search'
+
 export default function FaqCategoriesPage() {
-  return <div></div>
+  return <FaqCategorySearch />
 }

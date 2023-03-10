@@ -4,6 +4,7 @@ const dictionary = {
   reset: 'リセット',
   close: '閉じる',
   back: '戻る',
+  add: '追加',
   remove: '削除',
   edit: '編集',
   cancel: 'キャンセル',
@@ -14,6 +15,7 @@ const dictionary = {
   password_for_confirmation: '新しいパスワード確認用',
   login: 'ログイン',
   logout: 'ログアウト',
+  no_data_found: '検索結果がありません。',
   menu: 'メニュー',
   types: {
     workspace: {
@@ -46,6 +48,9 @@ const dictionary = {
       category: {
         title: 'カテゴリ',
         description: 'FAQのカテゴリを編集できます。',
+        search: {
+          title: 'FAQカテゴリ一覧',
+        },
       },
       admin: {
         title: '管理',
