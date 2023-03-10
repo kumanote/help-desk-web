@@ -73,6 +73,24 @@ export function validateAgentName({
   })
 }
 
+export function validateFaqCategoryTitle({
+  value,
+  required,
+  dict,
+}: {
+  value: string
+  required: boolean
+  dict: any
+}): ValidationResult {
+  return validateString({
+    value,
+    required,
+    minLength: 1,
+    maxLength: 50,
+    dict,
+  })
+}
+
 export function validateEmail({
   value,
   required,
@@ -148,7 +166,28 @@ export function validateUrl({
       value
     )
   ) {
-    return dict.validations.invalid_email_format
+    return dict.validations.invalid_url_format
+  }
+  return null
+}
+
+export function validateSlug({
+  value,
+  required,
+  dict,
+}: {
+  value: string
+  required: boolean
+  dict: any
+}): ValidationResult {
+  if (!value) {
+    if (required) {
+      return dict.validations.required
+    }
+    return null
+  }
+  if (!/^[a-zA-Z0-9_-]{3,55}$/.test(value)) {
+    return dict.validations.invalid_slug_format
   }
   return null
 }

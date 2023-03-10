@@ -4,6 +4,7 @@ const dictionary = {
   reset: 'reset',
   close: 'close',
   back: 'back',
+  add: 'add',
   remove: 'remove',
   edit: 'edit',
   cancel: 'cancel',
@@ -14,6 +15,7 @@ const dictionary = {
   password_for_confirmation: 'password for confirmation',
   login: 'sign in',
   logout: 'sign out',
+  no_data_found: 'No data found',
   menu: 'menu',
   types: {
     workspace: {
@@ -29,6 +31,14 @@ const dictionary = {
         'You can specify the URL for end users to return from FAQ site.',
       supported_locales: 'languages',
       supported_locales_help: 'You can set multiple languages for FAQ site.',
+    },
+    faq_category: {
+      slug: 'slug',
+      slug_help: 'Slug will become part of the URL for this category',
+    },
+    faq_category_content: {
+      locale: 'language',
+      title: 'title',
     },
   },
   navigations: {
@@ -46,6 +56,12 @@ const dictionary = {
       category: {
         title: 'Category',
         description: 'You can edit FAQ categories.',
+        search: {
+          title: 'FAQ categories',
+        },
+        new: {
+          title: 'Add new FAQ category',
+        },
       },
       admin: {
         title: 'Admin',
@@ -69,6 +85,16 @@ const dictionary = {
   },
   faq: {
     title: 'FAQ',
+    no_available_locale_warning: {
+      title: 'The locale settings has not been initialized',
+      description:
+        'When using the FAQ function, it is necessary to configure the FAQ system settings and set the language to be used in advance.',
+      nav_label: 'Navigate me to system settings',
+    },
+    create_category_succeeded:
+      'FAQ category has been created completely successfully.',
+    update_settings_succeeded:
+      'FAQ system settings has been saved completely successfully.',
   },
   settings: {
     title: 'account settings',
@@ -88,6 +114,7 @@ const dictionary = {
     initialized: 'Your workspace has been initialized successfully!',
   },
   validations: {
+    contains_error: 'There are input errors. Please confirm the contents.',
     network: 'Could not connect to the server properly. Please try again.',
     required: 'This field is required.',
     too_short: 'Provide this field at least {0} characters.',
@@ -98,6 +125,8 @@ const dictionary = {
     password_confirmation_must_match:
       'Password for confirmation dose not match',
     invalid_url_format: 'URL is not in valid format.',
+    invalid_slug_format:
+      'Slug must be 3 to 55 letters using alphanumeric characters, underscores (_) and hyphens (-).',
   },
 }
 
