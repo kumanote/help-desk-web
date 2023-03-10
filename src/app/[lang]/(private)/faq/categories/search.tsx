@@ -43,7 +43,7 @@ export function FaqCategorySearch() {
                 wrapperClassName="w-full lg:ml-0"
               />
             </div>
-            <div className="ml-3 flex items-center">
+            <div className="ml-3">
               <Button
                 type="button"
                 intent="primary"

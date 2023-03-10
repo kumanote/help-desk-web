@@ -12,7 +12,7 @@ export async function getFaqContentLocales({
   lang: Lang
   access_token: string
 }): Promise<ResponseResult<Array<FaqContentLocale> | null, ErrorResponse>> {
-  const response = await fetch(`${API_BASE_URL}/auth/scopes/`, {
+  const response = await fetch(`${API_BASE_URL}/general/faq_content_locales/`, {
     method: 'GET',
     headers: {
       'Accept-Language': lang,
@@ -25,11 +25,6 @@ export async function getFaqContentLocales({
       ok: (await response.json()) as Array<FaqContentLocale>,
     }
   } else {
-    if (response.status === 401) {
-      return {
-        ok: null,
-      }
-    }
     return {
       err: (await response.json()) as ErrorResponse,
     }

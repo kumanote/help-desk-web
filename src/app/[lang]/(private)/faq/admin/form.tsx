@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
 import { useAuthContext } from '@/app/auth-provider'
@@ -18,6 +18,7 @@ import { useForm } from '@/hooks/form'
 import { validateUrl } from '@/lib/validator'
 
 import { getFaqSettings, updateFaqSettings } from '@/api/gateway/faq'
+import { getFaqContentLocales } from '@/api/gateway/general'
 
 class LocaleOption implements MultiSelectOption {
   value: string
@@ -60,7 +61,7 @@ export function FaqAdminForm() {
   const [editing, setEditing] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const { data: settings, mutate: mutateSettings } = useSWR(
-    '/agent/me',
+    '/faq/settings',
     () => {
       return getFaqSettings({
         lang,
@@ -75,10 +76,32 @@ export function FaqAdminForm() {
     },
     { refreshInterval: 0 }
   )
-  const localeOptions = [
-    new LocaleOption('en_US', 'English (US)'),
-    new LocaleOption('ja_JP', '日本語'),
-  ]
+  const { data: locales } = useSWR(
+    '/general/faq_content_locales/',
+    () => {
+      return getFaqContentLocales({
+        lang,
+        access_token: authState.data!.token,
+      }).then((response) => {
+        if (response.ok) {
+          return response.ok
+        } else {
+          throw Error('failed to fetch available locales...')
+        }
+      })
+    },
+    { refreshInterval: 0 }
+  )
+  const [localeOptions, setLocaleOptions] = useState<Array<LocaleOption>>([])
+  useEffect(() => {
+    if (locales) {
+      setLocaleOptions(
+        locales.map((item) => {
+          return new LocaleOption(item.value, item.text)
+        })
+      )
+    }
+  }, [locales])
   const form = useForm<FormData>({
     initialValues: {
       homeUrl: '',
@@ -117,7 +140,7 @@ export function FaqAdminForm() {
       if (response.ok) {
         showNotification({
           type: 'success',
-          message: dictionary.settings.update_profile_succeeded,
+          message: dictionary.faq.update_settings_succeeded,
           autoClose: 5000,
         })
         await mutateSettings(response.ok)
