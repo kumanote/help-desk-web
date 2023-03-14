@@ -64,6 +64,9 @@ const dictionary = {
         new: {
           title: 'FAQカテゴリ新規作成',
         },
+        detail: {
+          title: 'FAQカテゴリ詳細',
+        },
       },
       admin: {
         title: '管理',
@@ -94,6 +97,7 @@ const dictionary = {
       nav_label: 'FAQシステム設定に移動',
     },
     create_category_succeeded: 'FAQカテゴリを作成しました。',
+    update_category_succeeded: 'FAQカテゴリを保存しました。',
     update_settings_succeeded: 'FAQシステム設定を保存しました。',
   },
   settings: {

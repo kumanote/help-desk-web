@@ -3,7 +3,10 @@ import { Lang } from '@/lib/language'
 
 import { ErrorResponse } from '@/api/schema/error'
 import { FaqCategory } from '@/api/schema/faq_category'
-import { CreateFaqCategoryContent } from '@/api/schema/faq_category_content'
+import {
+  CreateFaqCategoryContent,
+  UpdateFaqCategoryContent,
+} from '@/api/schema/faq_category_content'
 import { FaqSettings } from '@/api/schema/faq_settings'
 import { PagingResult } from '@/api/schema/paging_result'
 import { ResponseResult } from '@/api/schema/result'
@@ -107,6 +110,44 @@ export async function createFaqCategory({
   }
 }
 
+export async function updateFaqCategory({
+  lang,
+  access_token,
+  id,
+  slug,
+  contents,
+}: {
+  lang: Lang
+  access_token: string
+  id: string
+  slug: string
+  contents: Array<UpdateFaqCategoryContent>
+}): Promise<ResponseResult<FaqCategory, ErrorResponse>> {
+  const data = {
+    slug,
+    contents,
+  }
+  const response = await fetch(`${API_BASE_URL}/faq/categories/${id}`, {
+    method: 'PUT',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+    body: JSON.stringify(data),
+  })
+  if (response.ok) {
+    return {
+      ok: (await response.json()) as FaqCategory,
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
 export async function searchFaqCategory({
   lang,
   access_token,
@@ -144,6 +185,35 @@ export async function searchFaqCategory({
   if (response.ok) {
     return {
       ok: (await response.json()) as PagingResult<FaqCategory>,
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
+export async function getFaqCategory({
+  lang,
+  access_token,
+  id,
+}: {
+  lang: Lang
+  access_token: string
+  id: string
+}): Promise<ResponseResult<FaqCategory, ErrorResponse>> {
+  const response = await fetch(`${API_BASE_URL}/faq/categories/${id}`, {
+    method: 'GET',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+  })
+  if (response.ok) {
+    return {
+      ok: (await response.json()) as FaqCategory,
     }
   } else {
     return {

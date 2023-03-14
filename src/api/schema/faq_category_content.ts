@@ -10,3 +10,8 @@ export interface CreateFaqCategoryContent {
   locale: string
   title: string
 }
+
+export interface UpdateFaqCategoryContent {
+  locale: string
+  title: string
+}
