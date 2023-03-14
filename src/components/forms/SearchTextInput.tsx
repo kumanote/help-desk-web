@@ -1,6 +1,7 @@
 'use client'
 
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { InputHTMLAttributes } from 'react'
 
 interface Props {
   name: string
@@ -21,7 +22,7 @@ export function SearchTextInput({
   help,
   wrapperClassName,
   ...props
-}: Props) {
+}: Props & InputHTMLAttributes<HTMLInputElement>) {
   const hasError = !!error
   return (
     <div className={wrapperClassName}>

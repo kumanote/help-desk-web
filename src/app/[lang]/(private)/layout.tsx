@@ -14,7 +14,7 @@ export default async function PrivateRootLayout({
   return (
     <RouteHandler requireAuth={true}>
       <AppProvider>
-        <div className="h-screen overflow-hidden flex">
+        <div className="h-screen w-screen overflow-hidden flex">
           <Sidebar />
           <div className="flex flex-1 flex-col overflow-hidden">
             <Header />

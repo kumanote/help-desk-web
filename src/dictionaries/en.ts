@@ -35,6 +35,7 @@ const dictionary = {
     faq_category: {
       slug: 'slug',
       slug_help: 'Slug will become part of the URL for this category',
+      display_order: 'display order',
     },
     faq_category_content: {
       locale: 'language',

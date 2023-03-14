@@ -10,6 +10,9 @@ module.exports = {
       colors: ({ colors }) => ({
         primary: colors.sky,
       }),
+      maxWidth: {
+        72: '18rem',
+      },
     },
   },
   plugins: [

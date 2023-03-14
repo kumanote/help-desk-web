@@ -13,7 +13,7 @@ export default function Template({ children }: { children: ReactNode }) {
         <MobileSettingsNavigations />
         <div className="flex flex-1 xl:overflow-hidden">
           <DesktopSettingsNavigations />
-          <div className="flex-1 xl:overflow-y-auto">
+          <div className="w-full flex-1 xl:overflow-y-auto">
             <div className="pt-6 pb-10 px-4 sm:px-6 lg:pb-12 lg:px-8">
               {children}
             </div>
