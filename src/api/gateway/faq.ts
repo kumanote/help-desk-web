@@ -5,6 +5,7 @@ import { ErrorResponse } from '@/api/schema/error'
 import { FaqCategory } from '@/api/schema/faq_category'
 import { CreateFaqCategoryContent } from '@/api/schema/faq_category_content'
 import { FaqSettings } from '@/api/schema/faq_settings'
+import { PagingResult } from '@/api/schema/paging_result'
 import { ResponseResult } from '@/api/schema/result'
 
 export async function getFaqSettings({
@@ -98,6 +99,51 @@ export async function createFaqCategory({
   if (response.ok) {
     return {
       ok: (await response.json()) as FaqCategory,
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
+export async function searchFaqCategory({
+  lang,
+  access_token,
+  text,
+  limit,
+  offset,
+}: {
+  lang: Lang
+  access_token: string
+  text?: string
+  limit: number
+  offset: number
+}): Promise<ResponseResult<PagingResult<FaqCategory>, ErrorResponse>> {
+  const params: {
+    text?: string
+    limit: string
+    offset: string
+  } = {
+    limit: String(limit),
+    offset: String(offset),
+  }
+  if (text) {
+    params.text = text
+  }
+  const query = new URLSearchParams(params)
+  const response = await fetch(`${API_BASE_URL}/faq/categories/?${query}`, {
+    method: 'GET',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+  })
+  if (response.ok) {
+    return {
+      ok: (await response.json()) as PagingResult<FaqCategory>,
     }
   } else {
     return {

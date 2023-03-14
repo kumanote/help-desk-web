@@ -36,6 +36,7 @@ const dictionary = {
       slug: 'スラグ',
       slug_help:
         'スラグはこのカテゴリの記事を公開する場合のURLの一部に利用されます。',
+      display_order: '表示順',
     },
     faq_category_content: {
       locale: '言語',
