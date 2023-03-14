@@ -1,5 +1,5 @@
 import { CreateFaqCategory } from './form'
 
-export default function FaqAdminPage() {
+export default function CreateFaqCategoryPage() {
   return <CreateFaqCategory />
 }

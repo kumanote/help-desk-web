@@ -7,11 +7,7 @@ import LangProvider from '@/app/lang-provider'
 import NotificationsProvider from '@/app/notification-provider'
 import WorkspaceProvider from '@/app/workspace-provider'
 
-import { Lang, languages } from '@/lib/language'
-
-export async function generateStaticParams() {
-  return languages.map((lang) => ({ lang }))
-}
+import { Lang } from '@/lib/language'
 
 export default async function PublicRootLayout({
   children,

@@ -63,6 +63,9 @@ const dictionary = {
         new: {
           title: 'Add new FAQ category',
         },
+        detail: {
+          title: 'FAQ category details',
+        },
       },
       admin: {
         title: 'Admin',
@@ -94,6 +97,8 @@ const dictionary = {
     },
     create_category_succeeded:
       'FAQ category has been created completely successfully.',
+    update_category_succeeded:
+      'FAQ category has been saved completely successfully.',
     update_settings_succeeded:
       'FAQ system settings has been saved completely successfully.',
   },
