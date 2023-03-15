@@ -106,6 +106,7 @@ const dictionary: Dictionary = {
         'このFAQカテゴリを削除します。本当によろしいですか？',
       succeeded: 'FAQカテゴリを削除しました。',
     },
+    reorder_category_succeeded: 'FAQカテゴリを並び替えました。',
     update_settings_succeeded: 'FAQシステム設定を保存しました。',
   },
   settings: {

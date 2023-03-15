@@ -15,6 +15,7 @@ This project is work in progress and subject to frequent changes.
 - [Notification system](src/app/notification-provider.tsx)
 - [form hook](src/hooks/form.ts)
 - [form components](src/components/forms/)
+- [Sortable list - @dnd-kit](https://docs.dndkit.com/presets/sortable)
 
 # How to start dev server
 

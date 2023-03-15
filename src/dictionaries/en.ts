@@ -106,6 +106,8 @@ const dictionary: Dictionary = {
       confirm_description: 'Are you sure you want to delete this FAQ category?',
       succeeded: 'FAQ category has been deleted completely successfully.',
     },
+    reorder_category_succeeded:
+      'FAQ categories have been reordered successfully.',
     update_settings_succeeded:
       'FAQ system settings has been saved completely successfully.',
   },
