@@ -100,6 +100,7 @@ export interface Dictionary {
       confirm_description: string
       succeeded: string
     }
+    reorder_category_succeeded: string
     update_settings_succeeded: string
   }
   settings: {

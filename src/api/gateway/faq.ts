@@ -250,3 +250,42 @@ export async function deleteFaqCategory({
     }
   }
 }
+
+export async function reorderFaqCategory({
+  lang,
+  access_token,
+  id,
+  target_id,
+  append,
+}: {
+  lang: Lang
+  access_token: string
+  id: string
+  target_id: string
+  append: boolean
+}): Promise<ResponseResult<string, ErrorResponse>> {
+  const data = {
+    id,
+    target_id,
+    append,
+  }
+  const response = await fetch(`${API_BASE_URL}/faq/categories/reorder`, {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+    body: JSON.stringify(data),
+  })
+  if (response.ok) {
+    return {
+      ok: await response.text(),
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
