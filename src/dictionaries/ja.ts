@@ -1,4 +1,6 @@
-const dictionary = {
+import { Dictionary } from './interface'
+
+const dictionary: Dictionary = {
   submit: '送信',
   save: '保存',
   reset: 'リセット',
@@ -98,6 +100,12 @@ const dictionary = {
     },
     create_category_succeeded: 'FAQカテゴリを作成しました。',
     update_category_succeeded: 'FAQカテゴリを保存しました。',
+    delete_category: {
+      confirm_title: 'FAQカテゴリの削除',
+      confirm_description:
+        'このFAQカテゴリを削除します。本当によろしいですか？',
+      succeeded: 'FAQカテゴリを削除しました。',
+    },
     update_settings_succeeded: 'FAQシステム設定を保存しました。',
   },
   settings: {

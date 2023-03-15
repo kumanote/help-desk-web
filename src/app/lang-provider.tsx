@@ -3,11 +3,13 @@
 import type { Dispatch, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 
+import { Dictionary } from '@/dictionaries/interface'
+
 import { Lang } from '@/lib/language'
 
 interface LangStateData {
   lang: Lang
-  dictionary: any
+  dictionary: Dictionary
 }
 
 export type LangState = LangStateData | null
@@ -41,7 +43,7 @@ export default function LangProvider({
 }: {
   children: ReactNode
   lang: Lang
-  dictionary: any
+  dictionary: Dictionary
 }) {
   const [state, dispatch] = useLangStore()
   useEffect(() => {

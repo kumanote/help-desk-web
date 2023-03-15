@@ -1,4 +1,6 @@
-const dictionary = {
+import { Dictionary } from './interface'
+
+const dictionary: Dictionary = {
   submit: 'submit',
   save: 'save',
   reset: 'reset',
@@ -99,6 +101,11 @@ const dictionary = {
       'FAQ category has been created completely successfully.',
     update_category_succeeded:
       'FAQ category has been saved completely successfully.',
+    delete_category: {
+      confirm_title: 'Delete FAQ category',
+      confirm_description: 'Are you sure you want to delete this FAQ category?',
+      succeeded: 'FAQ category has been deleted completely successfully.',
+    },
     update_settings_succeeded:
       'FAQ system settings has been saved completely successfully.',
   },
