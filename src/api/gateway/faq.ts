@@ -221,3 +221,32 @@ export async function getFaqCategory({
     }
   }
 }
+
+export async function deleteFaqCategory({
+  lang,
+  access_token,
+  id,
+}: {
+  lang: Lang
+  access_token: string
+  id: string
+}): Promise<ResponseResult<string, ErrorResponse>> {
+  const response = await fetch(`${API_BASE_URL}/faq/categories/${id}`, {
+    method: 'DELETE',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+  })
+  if (response.ok) {
+    return {
+      ok: await response.text(),
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}

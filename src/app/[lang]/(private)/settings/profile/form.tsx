@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import useSWR from 'swr'
 
+import { Dictionary } from '@/dictionaries/interface'
+
 import { useAuthContext } from '@/app/auth-provider'
 import { useLangContext } from '@/app/lang-provider'
 import { showNotification } from '@/app/notification-provider'
@@ -22,7 +24,7 @@ interface FormData {
   name: string
 }
 
-function Heading({ dictionary }: { dictionary: any }) {
+function Heading({ dictionary }: { dictionary: Dictionary }) {
   return (
     <div>
       <h1 className="text-xl font-medium text-color-base capitalize">

@@ -1,5 +1,7 @@
 import 'server-only'
 
+import { Dictionary } from '@/dictionaries/interface'
+
 import { Lang } from '@/lib/language'
 
 const dictionaries = {
@@ -8,7 +10,7 @@ const dictionaries = {
   vi: () => import('@/dictionaries/vi').then((module) => module.default),
 }
 
-export function getDictionary(language: Lang) {
+export function getDictionary(language: Lang): Promise<Dictionary> {
   switch (language) {
     case 'ja':
       return dictionaries.ja()

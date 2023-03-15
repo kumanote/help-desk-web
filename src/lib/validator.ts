@@ -1,5 +1,7 @@
 import GraphemeSplitter from 'grapheme-splitter'
 
+import { Dictionary } from '@/dictionaries/interface'
+
 type ValidationResult = string | null
 
 function stringFormat(template: string, ...args: any[]) {
@@ -19,7 +21,7 @@ function validateString({
   required: boolean
   minLength?: number
   maxLength?: number
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   if (!value) {
     if (required) {
@@ -44,7 +46,7 @@ export function validateWorkspaceName({
   dict,
 }: {
   value: string
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   return validateString({
     value,
@@ -62,7 +64,7 @@ export function validateAgentName({
 }: {
   value: string
   required: boolean
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   return validateString({
     value,
@@ -80,7 +82,7 @@ export function validateFaqCategoryTitle({
 }: {
   value: string
   required: boolean
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   return validateString({
     value,
@@ -98,7 +100,7 @@ export function validateEmail({
 }: {
   value: string
   required: boolean
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   if (!value) {
     if (required) {
@@ -117,7 +119,7 @@ export function validatePassword({
   dict,
 }: {
   value: string
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   if (!value) {
     return dict.validations.required
@@ -135,7 +137,7 @@ export function validatePasswordConfirmation({
 }: {
   confirmation: string
   password: string
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   if (!confirmation) {
     return dict.validations.required
@@ -153,7 +155,7 @@ export function validateUrl({
 }: {
   value: string
   required: boolean
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   if (!value) {
     if (required) {
@@ -178,7 +180,7 @@ export function validateSlug({
 }: {
   value: string
   required: boolean
-  dict: any
+  dict: Dictionary
 }): ValidationResult {
   if (!value) {
     if (required) {

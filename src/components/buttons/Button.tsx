@@ -1,7 +1,7 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 const button = cva('button', {
   variants: {
@@ -133,33 +133,33 @@ const Loader = () => {
   )
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  className,
-  intent,
-  size,
-  loading,
-  children,
-  ...props
-}) => {
-  if (loading) {
-    return (
-      <button
-        className={button({ intent, size, className, condition: 'loading' })}
-        disabled
-        {...props}
-      >
-        <Loader />
-        {children}
-      </button>
-    )
-  } else {
-    return (
-      <button
-        className={button({ intent, size, className, condition: 'normal' })}
-        {...props}
-      >
-        {children}
-      </button>
-    )
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    { className, intent, size, loading, children, ...props },
+    ref
+  ) {
+    if (loading) {
+      return (
+        <button
+          className={button({ intent, size, className, condition: 'loading' })}
+          disabled
+          ref={ref}
+          {...props}
+        >
+          <Loader />
+          {children}
+        </button>
+      )
+    } else {
+      return (
+        <button
+          className={button({ intent, size, className, condition: 'normal' })}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </button>
+      )
+    }
   }
-}
+)
