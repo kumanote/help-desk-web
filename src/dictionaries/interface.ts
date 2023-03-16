@@ -40,6 +40,15 @@ export interface Dictionary {
       locale: string
       title: string
     }
+    faq_item: {
+      slug: string
+      slug_help: string
+    }
+    faq_item_content: {
+      locale: string
+      title: string
+      body: string
+    }
   }
   navigations: {
     dashboard: string
@@ -52,6 +61,12 @@ export interface Dictionary {
       item: {
         title: string
         description: string
+        search: {
+          title: string
+        }
+        new: {
+          title: string
+        }
       }
       category: {
         title: string

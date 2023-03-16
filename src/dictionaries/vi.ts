@@ -36,12 +36,21 @@ const dictionary: Dictionary = {
     },
     faq_category: {
       slug: 'slug',
-      slug_help: 'Slug will become part of the URL for this category',
+      slug_help: 'Slug will become part of the URL for this category.',
       display_order: 'display order',
     },
     faq_category_content: {
       locale: 'language',
       title: 'title',
+    },
+    faq_item: {
+      slug: 'slug',
+      slug_help: 'Slug will become part of the URL for this article.',
+    },
+    faq_item_content: {
+      locale: 'language',
+      title: 'title',
+      body: 'body',
     },
   },
   navigations: {
@@ -55,6 +64,12 @@ const dictionary: Dictionary = {
       item: {
         title: 'Article',
         description: 'You can edit FAQ articles.',
+        search: {
+          title: 'FAQ articles',
+        },
+        new: {
+          title: 'Add new FAQ article',
+        },
       },
       category: {
         title: 'Category',

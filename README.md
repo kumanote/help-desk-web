@@ -16,6 +16,7 @@ This project is work in progress and subject to frequent changes.
 - [form hook](src/hooks/form.ts)
 - [form components](src/components/forms/)
 - [Sortable list - @dnd-kit](https://docs.dndkit.com/presets/sortable)
+- [Rich Text Editor powered by Lexical](https://github.com/facebook/lexical)
 
 # How to start dev server
 
