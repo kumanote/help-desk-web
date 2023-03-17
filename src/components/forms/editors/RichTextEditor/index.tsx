@@ -22,8 +22,13 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table'
 import clsx from 'clsx'
 import { EditorState } from 'lexical'
 
+import { ImageNode } from './nodes/ImageNode'
 import CodeHighlightPlugin from './plugins/CodeHighlightPlugin'
+// TODO drag drop image files dose not work
+// import DragDropPaste from './plugins/DragDropPastePlugin'
+import ImagePlugin from './plugins/ImagePlugin'
 import ToolbarPlugin from './plugins/ToolbarPlugin'
+// import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import theme from './themes/RichTextEditorTheme'
 
 export type RichTextEditorValue = EditorState | string
@@ -66,6 +71,7 @@ export function RichTextEditor({
       LinkNode,
       CodeNode,
       CodeHighlightNode,
+      ImageNode,
       TableNode,
       TableCellNode,
       TableRowNode,
@@ -73,7 +79,7 @@ export function RichTextEditor({
   }
 
   const handleOnChange = (editorState: EditorState) => {
-    console.log(JSON.stringify(editorState.toJSON()))
+    // console.log(JSON.stringify(editorState.toJSON()))
     onChange(editorState)
   }
 
@@ -105,7 +111,9 @@ export function RichTextEditor({
             <ListPlugin />
             <LinkPlugin />
             <CodeHighlightPlugin />
+            <ImagePlugin />
             <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+            {/*<TreeViewPlugin />*/}
           </div>
         </div>
       </LexicalComposer>
