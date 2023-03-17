@@ -29,7 +29,22 @@
   @apply border border-zinc-300 dark:border-zinc-600;
 }
 
+.divide-color-base {
+  @apply divide-zinc-300 dark:divide-zinc-600;
+}
+
 /* container */
 .container {
   @apply mx-auto max-w-md px-2 sm:max-w-3xl sm:px-4 lg:max-w-7xl lg:px-6;
+}
+
+/* hide scroll bar */
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  /* Chrome, Safari */
+  display: none;
 }

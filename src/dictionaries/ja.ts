@@ -44,6 +44,15 @@ const dictionary: Dictionary = {
       locale: '言語',
       title: 'タイトル',
     },
+    faq_item: {
+      slug: 'スラグ',
+      slug_help: 'スラグはこの記事を公開する場合のURLの一部に利用されます。',
+    },
+    faq_item_content: {
+      locale: '言語',
+      title: 'タイトル',
+      body: '本文',
+    },
   },
   navigations: {
     dashboard: 'ダッシュボード',
@@ -56,6 +65,12 @@ const dictionary: Dictionary = {
       item: {
         title: '記事',
         description: 'FAQの記事を編集できます。',
+        search: {
+          title: 'FAQ記事一覧',
+        },
+        new: {
+          title: 'FAQ記事新規作成',
+        },
       },
       category: {
         title: 'カテゴリ',

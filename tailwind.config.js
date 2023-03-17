@@ -10,8 +10,29 @@ module.exports = {
       colors: ({ colors }) => ({
         primary: colors.sky,
       }),
-      maxWidth: {
+      minWidth: {
+        24: '6rem',
+        36: '9rem',
+        48: '12rem',
+        64: '16rem',
         72: '18rem',
+        96: '24rem',
+      },
+      maxWidth: {
+        24: '6rem',
+        36: '9rem',
+        48: '12rem',
+        64: '16rem',
+        72: '18rem',
+        96: '24rem',
+      },
+      minHeight: {
+        24: '6rem',
+        36: '9rem',
+        48: '12rem',
+        64: '16rem',
+        72: '18rem',
+        96: '24rem',
       },
     },
   },

@@ -1,9 +1,9 @@
-import { FaqItemsSearchForm } from './search-form'
+import { FaqItemsSearch } from './search'
 
 export default function FaqItemsPage() {
   return (
     <div>
-      <FaqItemsSearchForm />
+      <FaqItemsSearch />
     </div>
   )
 }

@@ -43,8 +43,8 @@ export function TextInput({
           placeholder={placeholder}
           className={`block w-full sm:text-sm rounded-md shadow-sm bg-color-base text-color-base ${
             hasError
-              ? 'border-red-300 text-red-600 placeholder-red-300 focus:ring-red-500 focus:border-red-500 pr-10'
-              : 'border-zinc-300 focus:ring-primary-500 focus:border-primary-500 dark:border-zinc-700'
+              ? 'border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 placeholder-red-300 dark:placeholder-red-600 focus:ring-red-500 focus:border-red-500 pr-10'
+              : 'border-zinc-300 dark:border-zinc-700 focus:ring-primary-500 focus:border-primary-500'
           }`}
           {...props}
         />
