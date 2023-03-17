@@ -8,6 +8,7 @@ import {
   CodeBracketIcon,
   CodeBracketSquareIcon,
   LinkIcon,
+  PhotoIcon,
 } from '@heroicons/react/24/outline'
 import { $createCodeNode } from '@lexical/code'
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link'
@@ -27,11 +28,17 @@ import {
   HeadingTagType,
 } from '@lexical/rich-text'
 import { $isAtNodeEnd, $wrapNodes } from '@lexical/selection'
-import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils'
+import {
+  $getNearestNodeOfType,
+  isMimeType,
+  mediaFileReader,
+  mergeRegister,
+} from '@lexical/utils'
 import clsx from 'clsx'
 import {
   $createParagraphNode,
   $getSelection,
+  $isNodeSelection,
   $isRangeSelection,
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
@@ -56,6 +63,13 @@ import {
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
+
+import { $isImageNode } from '@/components/forms/editors/RichTextEditor/nodes/ImageNode'
+
+import {
+  ACCEPTABLE_IMAGE_TYPES,
+  INSERT_IMAGE_COMMAND,
+} from '../plugins/ImagePlugin'
 
 const LowPriority = 1
 
@@ -529,9 +543,11 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false)
   const [isStrikethrough, setIsStrikethrough] = useState(false)
   const [isCode, setIsCode] = useState(false)
+  const [isImage, setIsImage] = useState(false)
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection()
+    setIsImage(false)
     if ($isRangeSelection(selection)) {
       const anchorNode = selection.anchor.getNode()
       const element =
@@ -567,6 +583,11 @@ export default function ToolbarPlugin() {
       } else {
         setIsLink(false)
       }
+    } else if ($isNodeSelection(selection)) {
+      const nodes = selection.getNodes()
+      if (nodes.length > 0 && $isImageNode(nodes[0])) {
+        setIsImage(true)
+      }
     }
   }, [editor])
 
@@ -579,7 +600,7 @@ export default function ToolbarPlugin() {
       }),
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,
-        (_payload, newEditor) => {
+        (_payload, _newEditor) => {
           updateToolbar()
           return false
         },
@@ -604,19 +625,21 @@ export default function ToolbarPlugin() {
     )
   }, [editor, updateToolbar])
 
+  const isTypographyEnabled = !isImage
   const isUl = blockType === 'ul'
-  const isUlEnabled = blockType !== 'code'
+  const isUlEnabled = blockType !== 'code' && !isImage
   const isOl = blockType === 'ol'
-  const isOlEnabled = blockType !== 'code'
+  const isOlEnabled = blockType !== 'code' && !isImage
   const isQuote = blockType === 'quote'
-  const isQuoteEnabled = blockType !== 'code'
-  const isBoldEnable = blockType !== 'code'
-  const isItalicEnable = blockType !== 'code'
-  const isUnderlineEnable = blockType !== 'code'
-  const isStrikethroughEnable = blockType !== 'code'
-  const isCodeEnable = blockType !== 'code'
-  const isCodeBlockEnable = blockType !== 'code'
-  const isLinkEnable = blockType !== 'code'
+  const isQuoteEnabled = blockType !== 'code' && !isImage
+  const isImageEnabled = blockType === 'paragraph' && !isImage
+  const isBoldEnable = blockType !== 'code' && !isImage
+  const isItalicEnable = blockType !== 'code' && !isImage
+  const isUnderlineEnable = blockType !== 'code' && !isImage
+  const isStrikethroughEnable = blockType !== 'code' && !isImage
+  const isCodeEnable = blockType !== 'code' && !isImage
+  const isCodeBlockEnable = blockType !== 'code' && !isImage
+  const isLinkEnable = blockType !== 'code' && !isImage
   const isAlignEnable = blockType !== 'code'
 
   const insertLink = useCallback(
@@ -684,16 +707,22 @@ export default function ToolbarPlugin() {
       <div className="flex items-center space-x-1 px-1 py-0.5">
         <button
           type="button"
-          className="flex items-center justify-between p-2 rounded-md min-w-36 cursor-pointer text-color-base hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          className={clsx(
+            'flex items-center justify-between p-2 rounded-md min-w-36',
+            isTypographyEnabled
+              ? 'cursor-pointer text-color-base hover:bg-zinc-100 dark:hover:bg-zinc-800'
+              : 'cursor-not-allowed text-color-dimmed'
+          )}
           onClick={(event) => {
             event.preventDefault()
+            if (!isTypographyEnabled) return false
             setShowTypographyOptionsDropDown(!showTypographyOptionsDropDown)
           }}
           aria-label="Formatting Options"
         >
           <div className="flex items-center space-x-2">
             <BlockTypeIcon blockType={blockType} className="w-4 h-4" />
-            <span className="text-color-label text-xs">
+            <span className="text-xs">
               {getBlockTypeToBlockName(blockType)}
             </span>
           </div>
@@ -818,6 +847,44 @@ export default function ToolbarPlugin() {
             <path d="M7.066 4.76A1.665 1.665 0 0 0 4 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z" />
           </svg>
         </button>
+        <label
+          className={clsx(
+            'relative flex items-center justify-center p-2 rounded-md',
+            isImageEnabled
+              ? isImage
+                ? 'cursor-pointer text-primary-500 bg-zinc-100 dark:bg-zinc-800'
+                : 'cursor-pointer text-color-base hover:bg-zinc-100 dark:hover:bg-zinc-800'
+              : 'cursor-not-allowed text-color-dimmed'
+          )}
+        >
+          <PhotoIcon className="w-4 h-4" />
+          <input
+            type="file"
+            accept="image/*"
+            className="sr-only"
+            onChange={async (event) => {
+              if (!event.target.files) return false
+              const files = []
+              for (let i = 0; i < event.target.files.length; i++) {
+                files.push(event.target.files[i])
+              }
+              const filesResult = await mediaFileReader(
+                files,
+                [ACCEPTABLE_IMAGE_TYPES].flatMap((x) => x)
+              )
+              editor.update(() => {
+                for (const { file, result } of filesResult) {
+                  if (isMimeType(file, ACCEPTABLE_IMAGE_TYPES)) {
+                    editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+                      altText: file.name,
+                      src: result,
+                    })
+                  }
+                }
+              })
+            }}
+          />
+        </label>
       </div>
       <div className="flex items-center space-x-1 px-1">
         <button
