@@ -1,7 +1,9 @@
 'use client'
 
+import { CodeHighlightNode, CodeNode } from '@lexical/code'
 import { AutoLinkNode, LinkNode } from '@lexical/link'
 import { ListItemNode, ListNode } from '@lexical/list'
+import { TRANSFORMERS } from '@lexical/markdown'
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
 import {
   InitialConfigType,
@@ -12,22 +14,27 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary'
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin'
 import { ListPlugin } from '@lexical/react/LexicalListPlugin'
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin'
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin'
 import { HeadingNode, QuoteNode } from '@lexical/rich-text'
+import { TableCellNode, TableNode, TableRowNode } from '@lexical/table'
 import clsx from 'clsx'
-import { $getRoot, $getSelection, EditorState } from 'lexical'
+import { EditorState } from 'lexical'
 
+import CodeHighlightPlugin from './plugins/CodeHighlightPlugin'
 import ToolbarPlugin from './plugins/ToolbarPlugin'
 import theme from './themes/RichTextEditorTheme'
 
-export type RichTextEditorValue = EditorState | null
+export type RichTextEditorValue = EditorState | string
 
 export function createEmptyValue(): RichTextEditorValue {
-  return null
+  // empty paragraph
+  return '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
 }
 
 interface Props {
+  name: string
   value?: RichTextEditorValue | null
   onChange: (value: RichTextEditorValue) => void
   placeholder?: string
@@ -36,6 +43,7 @@ interface Props {
 }
 
 export function RichTextEditor({
+  name,
   value,
   onChange,
   placeholder,
@@ -43,7 +51,7 @@ export function RichTextEditor({
   wrapperClassName,
 }: Props) {
   const initialConfig: InitialConfigType = {
-    namespace: 'MyEditor',
+    namespace: `RTE-${name}`,
     onError(error: Error) {
       throw error
     },
@@ -56,17 +64,16 @@ export function RichTextEditor({
       ListNode,
       AutoLinkNode,
       LinkNode,
+      CodeNode,
+      CodeHighlightNode,
+      TableNode,
+      TableCellNode,
+      TableRowNode,
     ],
   }
 
   const handleOnChange = (editorState: EditorState) => {
-    editorState.read(() => {
-      // Read the contents of the EditorState here.
-      const root = $getRoot()
-      const selection = $getSelection()
-
-      console.log(root, selection)
-    })
+    console.log(JSON.stringify(editorState.toJSON()))
     onChange(editorState)
   }
 
@@ -83,7 +90,7 @@ export function RichTextEditor({
           <div className="relative">
             <RichTextPlugin
               contentEditable={
-                <ContentEditable className="min-h-24 px-6 py-4" />
+                <ContentEditable className="min-h-24 px-6 py-4 focus:ring-2 focus:ring-inset focus:ring-primary-500 focus:border-primary-500" />
               }
               placeholder={
                 <div className="absolute top-4 left-6 truncate inline-block select-none pointer-events-none text-base text-color-dimmed">
@@ -97,6 +104,8 @@ export function RichTextEditor({
             <AutoFocusPlugin />
             <ListPlugin />
             <LinkPlugin />
+            <CodeHighlightPlugin />
+            <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
           </div>
         </div>
       </LexicalComposer>

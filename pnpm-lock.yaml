@@ -9,11 +9,14 @@ specifiers:
   '@formatjs/intl-localematcher': ^0.2.32
   '@headlessui/react': ^1.7.10
   '@heroicons/react': ^2.0.15
+  '@lexical/code': ^0.9.0
   '@lexical/link': ^0.9.0
   '@lexical/list': ^0.9.0
+  '@lexical/markdown': ^0.9.0
   '@lexical/react': ^0.9.0
   '@lexical/rich-text': ^0.9.0
   '@lexical/selection': ^0.9.0
+  '@lexical/table': ^0.9.0
   '@lexical/utils': ^0.9.0
   '@next/font': 13.1.6
   '@tailwindcss/aspect-ratio': ^0.4.2
@@ -63,11 +66,14 @@ dependencies:
   '@formatjs/intl-localematcher': 0.2.32
   '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.16_react@18.2.0
+  '@lexical/code': 0.9.0_lexical@0.9.0
   '@lexical/link': 0.9.0_lexical@0.9.0
   '@lexical/list': 0.9.0_lexical@0.9.0
+  '@lexical/markdown': 0.9.0_cf7pq5pfcubj3h464xcmegm6du
   '@lexical/react': 0.9.0_2mv7kewri2bqbh4ekiqtgik624
   '@lexical/rich-text': 0.9.0_t5zx24bq56ozew7tqqxepjt3gu
   '@lexical/selection': 0.9.0_lexical@0.9.0
+  '@lexical/table': 0.9.0_lexical@0.9.0
   '@lexical/utils': 0.9.0_lexical@0.9.0
   '@next/font': 13.1.6
   '@types/node': 18.13.0
@@ -717,6 +723,23 @@ packages:
       '@lexical/link': 0.9.0_lexical@0.9.0
       '@lexical/list': 0.9.0_lexical@0.9.0
       '@lexical/rich-text': 0.9.0_ygdiab3l25ii2thiryscflw2vq
+      '@lexical/text': 0.9.0_lexical@0.9.0
+      '@lexical/utils': 0.9.0_lexical@0.9.0
+      lexical: 0.9.0
+    transitivePeerDependencies:
+      - '@lexical/clipboard'
+      - '@lexical/selection'
+    dev: false
+
+  /@lexical/markdown/0.9.0_cf7pq5pfcubj3h464xcmegm6du:
+    resolution: {integrity: sha512-2VcA+csrnVpXDLU4G69gg4DCKiU1mUn0lPUKOp74iuR+g2K/5PbiRSwJD6vbn18Qxp5qM+bGmMVDbPXp6rIxvA==}
+    peerDependencies:
+      lexical: 0.9.0
+    dependencies:
+      '@lexical/code': 0.9.0_lexical@0.9.0
+      '@lexical/link': 0.9.0_lexical@0.9.0
+      '@lexical/list': 0.9.0_lexical@0.9.0
+      '@lexical/rich-text': 0.9.0_t5zx24bq56ozew7tqqxepjt3gu
       '@lexical/text': 0.9.0_lexical@0.9.0
       '@lexical/utils': 0.9.0_lexical@0.9.0
       lexical: 0.9.0

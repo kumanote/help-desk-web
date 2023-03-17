@@ -74,6 +74,7 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
           wrapperClassName="sm:col-span-2"
         />
         <RichTextEditor
+          name="body"
           value={body}
           onChange={setBody}
           label={dictionary.types.faq_item_content.body}
