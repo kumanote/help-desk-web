@@ -12,6 +12,7 @@ const theme: EditorThemeClasses = {
     h3: 'text-3xl font-bold leading-tight',
     h4: 'text-2xl font-bold leading-snug tracking-tight',
     h5: 'text-xl font-bold leading-snug tracking-tight',
+    h6: 'text-lg font-bold leading-snug tracking-tight',
   },
   list: {
     nested: {
