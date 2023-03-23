@@ -38,6 +38,14 @@ export function createEmptyValue(): RichTextEditorValue {
   return '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
 }
 
+export function getJsonString(value: RichTextEditorValue): string {
+  if (typeof value === 'string') {
+    return value
+  } else {
+    return JSON.stringify(value.toJSON())
+  }
+}
+
 interface Props {
   name: string
   value?: RichTextEditorValue | null

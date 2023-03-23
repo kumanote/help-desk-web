@@ -17,6 +17,7 @@ export interface Dictionary {
   logout: string
   no_data_found: string
   menu: string
+  publish: string
   types: {
     workspace: {
       name: string
@@ -116,6 +117,13 @@ export interface Dictionary {
       succeeded: string
     }
     reorder_category_succeeded: string
+    create_item_succeeded: string
+    update_item_succeeded: string
+    delete_item: {
+      confirm_title: string
+      confirm_description: string
+      succeeded: string
+    }
     update_settings_succeeded: string
   }
   settings: {

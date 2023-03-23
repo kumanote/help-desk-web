@@ -19,6 +19,7 @@ const dictionary: Dictionary = {
   logout: 'ログアウト',
   no_data_found: '検索結果がありません。',
   menu: 'メニュー',
+  publish: '公開する',
   types: {
     workspace: {
       name: 'ワークスペース名',
@@ -122,6 +123,13 @@ const dictionary: Dictionary = {
       succeeded: 'FAQカテゴリを削除しました。',
     },
     reorder_category_succeeded: 'FAQカテゴリを並び替えました。',
+    create_item_succeeded: '記事を作成しました。',
+    update_item_succeeded: '記事を保存しました。',
+    delete_item: {
+      confirm_title: '記事の削除',
+      confirm_description: 'この記事を削除します。本当によろしいですか？',
+      succeeded: '記事を削除しました。',
+    },
     update_settings_succeeded: 'FAQシステム設定を保存しました。',
   },
   settings: {
