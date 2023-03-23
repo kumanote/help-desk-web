@@ -1,6 +1,7 @@
 'use client'
 
 import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
+import { InputHTMLAttributes } from 'react'
 
 interface Props {
   type?: string
@@ -23,7 +24,7 @@ export function TextInput({
   help,
   wrapperClassName,
   ...props
-}: Props) {
+}: Props & InputHTMLAttributes<HTMLInputElement>) {
   const hasError = !!error
   return (
     <div className={wrapperClassName}>

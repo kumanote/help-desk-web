@@ -93,6 +93,24 @@ export function validateFaqCategoryTitle({
   })
 }
 
+export function validateFaqItemTitle({
+  value,
+  required,
+  dict,
+}: {
+  value: string
+  required: boolean
+  dict: Dictionary
+}): ValidationResult {
+  return validateString({
+    value,
+    required,
+    minLength: 1,
+    maxLength: 50,
+    dict,
+  })
+}
+
 export function validateEmail({
   value,
   required,

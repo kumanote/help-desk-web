@@ -19,6 +19,7 @@ const dictionary: Dictionary = {
   logout: 'sign out',
   no_data_found: 'No data found',
   menu: 'menu',
+  publish: 'publish',
   types: {
     workspace: {
       name: 'workspace name',
@@ -123,6 +124,15 @@ const dictionary: Dictionary = {
     },
     reorder_category_succeeded:
       'FAQ categories have been reordered successfully.',
+    create_item_succeeded:
+      'FAQ article has been saved completely successfully.',
+    update_item_succeeded:
+      'FAQ article has been saved completely successfully.',
+    delete_item: {
+      confirm_title: 'Delete FAQ article',
+      confirm_description: 'Are you sure you want to delete this FAQ article?',
+      succeeded: 'FAQ article has been deleted completely successfully.',
+    },
     update_settings_succeeded:
       'FAQ system settings has been saved completely successfully.',
   },
