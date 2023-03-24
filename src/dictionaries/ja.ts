@@ -21,6 +21,8 @@ const dictionary: Dictionary = {
   no_data_found: '検索結果がありません。',
   menu: 'メニュー',
   publish: '公開する',
+  public: '公開中',
+  draft: '非公開',
   types: {
     workspace: {
       name: 'ワークスペース名',
@@ -50,6 +52,7 @@ const dictionary: Dictionary = {
       slug: 'スラグ',
       slug_help: 'スラグはこの記事を公開する場合のURLの一部に利用されます。',
       category: 'カテゴリ',
+      publish_status: '公開ステータス',
     },
     faq_item_content: {
       locale: '言語',

@@ -216,7 +216,6 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
           help={dictionary.types.faq_item.slug_help}
           placeholder="how-to-sign-in"
           {...form.getInputProps('slug')}
-          wrapperClassName="sm:col-span-2"
         />
         <MultiFaqCategoryPicker
           value={form.values.categories}
@@ -228,7 +227,6 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
           settings={settings}
           lang={lang}
           dictionary={dictionary}
-          wrapperClassName="sm:col-span-2"
         />
         <div className="sm:col-span-2">
           {/* contents locale tab area */}
