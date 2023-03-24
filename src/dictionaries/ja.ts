@@ -89,6 +89,7 @@ const dictionary: Dictionary = {
         },
         detail: {
           title: 'FAQカテゴリ詳細',
+          search_items: '記事一覧',
         },
       },
       admin: {
@@ -128,6 +129,7 @@ const dictionary: Dictionary = {
       succeeded: 'FAQカテゴリを削除しました。',
     },
     reorder_category_succeeded: 'FAQカテゴリを並び替えました。',
+    reorder_item_succeeded: '記事の表示順序を並び替えました',
     create_item_succeeded: '記事を作成しました。',
     update_item_succeeded: '記事を保存しました。',
     delete_item: {

@@ -31,6 +31,8 @@ import { FaqCategory } from '@/api/schema/faq_category'
 import { UpdateFaqCategoryContent } from '@/api/schema/faq_category_content'
 import { FaqSettings } from '@/api/schema/faq_settings'
 
+import { FaqItemsByCategorySearch } from './search-items'
+
 class LocaleOption implements SelectOption {
   value: string
   text: string
@@ -585,6 +587,7 @@ export function FaqCategoryDetail({ id }: { id: string }) {
         category={category}
         onSave={mutateCategory}
       />
+      <FaqItemsByCategorySearch settings={settings} category={category} />
     </div>
   )
 }

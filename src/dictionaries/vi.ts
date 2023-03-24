@@ -88,6 +88,7 @@ const dictionary: Dictionary = {
         },
         detail: {
           title: 'FAQ category details',
+          search_items: 'FAQ articles',
         },
       },
       admin: {
@@ -129,6 +130,7 @@ const dictionary: Dictionary = {
     },
     reorder_category_succeeded:
       'FAQ categories have been reordered successfully.',
+    reorder_item_succeeded: 'FAQ articles have been reordered successfully.',
     create_item_succeeded:
       'FAQ article has been saved completely successfully.',
     update_item_succeeded:
