@@ -26,9 +26,8 @@ import { FaqSettings } from '@/api/schema/faq_settings'
 const PAGE_SIZE = 10
 
 interface Props {
-  value: Array<string>
-  initialOptions?: Array<FaqCategory>
-  onChange: (value: Array<string>) => void
+  value: Array<FaqCategory>
+  onChange: (value: Array<FaqCategory>) => void
   label?: string
   wrapperClassName?: string
   displayLocale?: FaqContentLocale
@@ -61,7 +60,6 @@ function displayCategory(
 
 export function MultiFaqCategoryPicker({
   value,
-  initialOptions,
   onChange,
   label,
   wrapperClassName,
@@ -76,7 +74,7 @@ export function MultiFaqCategoryPicker({
   const [searchText, setSearchText] = useState('')
   const [searchParams, setSearchParams] = useState<SearchParams>({
     text: searchText,
-    ids: value,
+    ids: value.map((item) => item.id),
     page: 1,
   })
   const handleSearchTextBlur = () => {
@@ -110,12 +108,9 @@ export function MultiFaqCategoryPicker({
     ? Math.floor(searchResult.total / PAGE_SIZE) +
       (searchResult.total % PAGE_SIZE > 0 ? 1 : 0)
     : 0
-  const [selected, setSelected] = useState<Array<FaqCategory>>(
-    initialOptions || []
-  )
+  const [selected, setSelected] = useState<Array<FaqCategory>>(value)
   const handleOnOk = () => {
-    const newValue = selected.map((item) => item.id)
-    onChange(newValue)
+    onChange(selected)
     setOpen(false)
   }
   return (
@@ -139,7 +134,7 @@ export function MultiFaqCategoryPicker({
                     key={category.id}
                     className={clsx(
                       'inline-block items-center rounded-full px-3 py-0.5 text-sm font-medium bg-zinc-100 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 truncate',
-                      i < value.length - 1 ? 'mr-1' : ''
+                      i < selected.length - 1 ? 'mr-1' : ''
                     )}
                   >
                     {displayCategory(category, displayLocale)}

@@ -177,7 +177,7 @@ export async function searchFaqCategory({
   if (text) {
     params.text = text
   }
-  if (ids) {
+  if (ids && ids.length > 0) {
     params.ids = ids.join(',')
   }
   const query = new URLSearchParams(params)
@@ -321,6 +321,50 @@ export async function createFaqItem({
   }
   const response = await fetch(`${API_BASE_URL}/faq/items/`, {
     method: 'POST',
+    cache: 'no-store',
+    headers: {
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+    body: JSON.stringify(data),
+  })
+  if (response.ok) {
+    return {
+      ok: (await response.json()) as FaqItem,
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
+export async function updateFaqItem({
+  lang,
+  access_token,
+  id,
+  slug,
+  is_published,
+  contents,
+  categories,
+}: {
+  lang: Lang
+  access_token: string
+  id: string
+  slug: string
+  is_published: boolean
+  contents: Array<CreateFaqItemContent>
+  categories: Array<string>
+}): Promise<ResponseResult<FaqItem, ErrorResponse>> {
+  const data = {
+    slug,
+    is_published,
+    contents,
+    categories,
+  }
+  const response = await fetch(`${API_BASE_URL}/faq/items/${id}`, {
+    method: 'PUT',
     cache: 'no-store',
     headers: {
       'Accept-Language': lang,

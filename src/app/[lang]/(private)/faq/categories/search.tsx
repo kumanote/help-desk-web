@@ -147,7 +147,7 @@ export function FaqCategorySearch() {
         if (response.ok) {
           return response.ok
         } else {
-          throw Error('failed to fetch faq settings...')
+          throw Error('failed to search faq categories...')
         }
       })
     },

@@ -74,6 +74,9 @@ const dictionary: Dictionary = {
         new: {
           title: 'FAQ記事新規作成',
         },
+        detail: {
+          title: 'FAQ記事詳細',
+        },
       },
       category: {
         title: 'カテゴリ',

@@ -29,6 +29,7 @@ import { useForm } from '@/hooks/form'
 import { validateFaqItemTitle, validateSlug } from '@/lib/validator'
 
 import { createFaqItem, getFaqSettings } from '@/api/gateway/faq'
+import { FaqCategory } from '@/api/schema/faq_category'
 import { CreateFaqItemContent } from '@/api/schema/faq_item_content'
 import { FaqSettings } from '@/api/schema/faq_settings'
 
@@ -53,7 +54,7 @@ interface ContentFormData {
 
 interface FormData {
   slug: string
-  categories: Array<string>
+  categories: Array<FaqCategory>
   isPublished: boolean
   contents: Map<string, ContentFormData>
 }
@@ -152,7 +153,7 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
         slug: values.slug,
         is_published: values.isPublished,
         contents,
-        categories: [],
+        categories: values.categories.map((item) => item.id),
       })
       if (response.ok) {
         showNotification({
@@ -282,7 +283,7 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
                   {...form.getInputProps(`contents.${locale.value}.title`)}
                 />
                 <RichTextEditor
-                  name="body"
+                  name={`body-${locale.value}`}
                   value={body}
                   onChange={setBody}
                   label={`${dictionary.types.faq_item_content.body} (${locale.text})`}
