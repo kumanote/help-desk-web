@@ -154,17 +154,20 @@ export async function searchFaqCategory({
   lang,
   access_token,
   text,
+  ids,
   limit,
   offset,
 }: {
   lang: Lang
   access_token: string
   text?: string
+  ids?: Array<string>
   limit: number
   offset: number
 }): Promise<ResponseResult<PagingResult<FaqCategory>, ErrorResponse>> {
   const params: {
     text?: string
+    ids?: string
     limit: string
     offset: string
   } = {
@@ -173,6 +176,9 @@ export async function searchFaqCategory({
   }
   if (text) {
     params.text = text
+  }
+  if (ids) {
+    params.ids = ids.join(',')
   }
   const query = new URLSearchParams(params)
   const response = await fetch(`${API_BASE_URL}/faq/categories/?${query}`, {

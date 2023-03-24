@@ -140,7 +140,7 @@ export function FaqCategorySearch() {
       return searchFaqCategory({
         lang,
         access_token: authState.data!.token,
-        text: searchForm.text,
+        text: searchParams.text,
         limit: PAGE_SIZE,
         offset,
       }).then((response) => {

@@ -108,7 +108,7 @@ export function RichTextEditor({
               }
               placeholder={
                 <div className="absolute top-4 left-6 truncate inline-block select-none pointer-events-none text-base text-color-dimmed">
-                  {placeholder || 'Enter some text'}
+                  {placeholder}
                 </div>
               }
               ErrorBoundary={LexicalErrorBoundary}
