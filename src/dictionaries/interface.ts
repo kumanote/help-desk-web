@@ -8,6 +8,7 @@ export interface Dictionary {
   remove: string
   edit: string
   cancel: string
+  select: string
   email: string
   password: string
   current_password: string
@@ -44,6 +45,7 @@ export interface Dictionary {
     faq_item: {
       slug: string
       slug_help: string
+      category: string
     }
     faq_item_content: {
       locale: string

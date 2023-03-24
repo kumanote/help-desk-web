@@ -10,6 +10,7 @@ const dictionary: Dictionary = {
   remove: '削除',
   edit: '編集',
   cancel: 'キャンセル',
+  select: '選択',
   email: 'メールアドレス',
   password: 'パスワード',
   current_password: '現在のパスワード',
@@ -48,6 +49,7 @@ const dictionary: Dictionary = {
     faq_item: {
       slug: 'スラグ',
       slug_help: 'スラグはこの記事を公開する場合のURLの一部に利用されます。',
+      category: 'カテゴリ',
     },
     faq_item_content: {
       locale: '言語',

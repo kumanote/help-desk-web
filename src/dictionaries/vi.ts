@@ -10,6 +10,7 @@ const dictionary: Dictionary = {
   remove: 'remove',
   edit: 'edit',
   cancel: 'cancel',
+  select: 'select',
   email: 'email',
   password: 'password',
   current_password: 'current password',
@@ -47,6 +48,7 @@ const dictionary: Dictionary = {
     faq_item: {
       slug: 'slug',
       slug_help: 'Slug will become part of the URL for this article.',
+      category: 'category',
     },
     faq_item_content: {
       locale: 'language',

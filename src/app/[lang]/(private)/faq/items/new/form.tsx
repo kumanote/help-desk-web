@@ -12,6 +12,7 @@ import { showNotification } from '@/app/notification-provider'
 
 import { AlertErrors } from '@/components/alerts/AlertErrors'
 import { Button } from '@/components/buttons/Button'
+import { MultiFaqCategoryPicker } from '@/components/forms/MultiFaqCategoryPicker'
 import { Select, SelectOption } from '@/components/forms/Select'
 import { TextInput } from '@/components/forms/TextInput'
 import { Toggle } from '@/components/forms/Toggle'
@@ -52,6 +53,7 @@ interface ContentFormData {
 
 interface FormData {
   slug: string
+  categories: Array<string>
   isPublished: boolean
   contents: Map<string, ContentFormData>
 }
@@ -84,6 +86,7 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
   const form = useForm<FormData>({
     initialValues: {
       slug: '',
+      categories: [],
       isPublished: false,
       contents: initContents(),
     },
@@ -212,6 +215,18 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
           help={dictionary.types.faq_item.slug_help}
           placeholder="how-to-sign-in"
           {...form.getInputProps('slug')}
+          wrapperClassName="sm:col-span-2"
+        />
+        <MultiFaqCategoryPicker
+          value={form.values.categories}
+          onChange={(categories) =>
+            form.setFieldValue('categories', categories)
+          }
+          label={dictionary.types.faq_item.category}
+          displayLocale={settings.supported_locales[0]}
+          settings={settings}
+          lang={lang}
+          dictionary={dictionary}
           wrapperClassName="sm:col-span-2"
         />
         <div className="sm:col-span-2">
