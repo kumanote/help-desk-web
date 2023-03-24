@@ -70,6 +70,9 @@ export interface Dictionary {
         new: {
           title: string
         }
+        detail: {
+          title: string
+        }
       }
       category: {
         title: string

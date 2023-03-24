@@ -4,7 +4,6 @@ import { CodeHighlightNode, CodeNode } from '@lexical/code'
 import { AutoLinkNode, LinkNode } from '@lexical/link'
 import { ListItemNode, ListNode } from '@lexical/list'
 import { TRANSFORMERS } from '@lexical/markdown'
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
 import {
   InitialConfigType,
   LexicalComposer,
@@ -49,8 +48,9 @@ export function getJsonString(value: RichTextEditorValue): string {
 interface Props {
   name: string
   value?: RichTextEditorValue | null
-  onChange: (value: RichTextEditorValue) => void
+  onChange?: (value: RichTextEditorValue) => void
   placeholder?: string
+  readonly?: boolean
   label?: string
   wrapperClassName?: string
 }
@@ -60,6 +60,7 @@ export function RichTextEditor({
   value,
   onChange,
   placeholder,
+  readonly,
   label,
   wrapperClassName,
 }: Props) {
@@ -70,6 +71,7 @@ export function RichTextEditor({
     },
     theme,
     editorState: value,
+    editable: !readonly,
     nodes: [
       HeadingNode,
       QuoteNode,
@@ -88,7 +90,7 @@ export function RichTextEditor({
 
   const handleOnChange = (editorState: EditorState) => {
     // console.log(JSON.stringify(editorState.toJSON()))
-    onChange(editorState)
+    if (typeof onChange !== 'undefined') onChange(editorState)
   }
 
   return (
@@ -100,7 +102,7 @@ export function RichTextEditor({
       )}
       <LexicalComposer initialConfig={initialConfig}>
         <div className="relative bg-color-base border-base text-color-base rounded-md divide-y divide-color-base">
-          <ToolbarPlugin />
+          {!readonly && <ToolbarPlugin />}
           <div className="relative">
             <RichTextPlugin
               contentEditable={
@@ -115,7 +117,6 @@ export function RichTextEditor({
             />
             <OnChangePlugin onChange={handleOnChange} />
             <HistoryPlugin />
-            <AutoFocusPlugin />
             <ListPlugin />
             <LinkPlugin />
             <CodeHighlightPlugin />

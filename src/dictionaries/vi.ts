@@ -73,6 +73,9 @@ const dictionary: Dictionary = {
         new: {
           title: 'Add new FAQ article',
         },
+        detail: {
+          title: 'FAQ article details',
+        },
       },
       category: {
         title: 'Category',
