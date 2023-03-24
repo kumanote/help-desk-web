@@ -93,6 +93,7 @@ export function MultiFaqCategoryPicker({
         lang,
         access_token: authState.data!.token,
         text: searchParams.text,
+        ids: searchParams.ids,
         limit: PAGE_SIZE,
         offset,
       }).then((response) => {
