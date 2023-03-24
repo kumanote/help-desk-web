@@ -177,7 +177,7 @@ export async function searchFaqCategory({
   if (text) {
     params.text = text
   }
-  if (ids) {
+  if (ids && ids.length > 0) {
     params.ids = ids.join(',')
   }
   const query = new URLSearchParams(params)

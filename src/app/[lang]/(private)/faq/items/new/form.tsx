@@ -152,7 +152,7 @@ function CreateFaqItemForm({ settings }: { settings: FaqSettings }) {
         slug: values.slug,
         is_published: values.isPublished,
         contents,
-        categories: [],
+        categories: values.categories,
       })
       if (response.ok) {
         showNotification({
