@@ -21,6 +21,8 @@ const dictionary: Dictionary = {
   no_data_found: 'No data found',
   menu: 'menu',
   publish: 'publish',
+  public: 'public',
+  draft: 'draft',
   types: {
     workspace: {
       name: 'workspace name',
@@ -49,6 +51,7 @@ const dictionary: Dictionary = {
       slug: 'slug',
       slug_help: 'Slug will become part of the URL for this article.',
       category: 'category',
+      publish_status: 'status',
     },
     faq_item_content: {
       locale: 'language',

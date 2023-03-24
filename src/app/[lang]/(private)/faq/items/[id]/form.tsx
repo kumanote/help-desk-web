@@ -229,7 +229,6 @@ function FaqItemDetailEditor({
           help={dictionary.types.faq_item.slug_help}
           placeholder="how-to-sign-in"
           {...form.getInputProps('slug')}
-          wrapperClassName="sm:col-span-2"
         />
         <MultiFaqCategoryPicker
           value={form.values.categories}
@@ -241,7 +240,6 @@ function FaqItemDetailEditor({
           settings={settings}
           lang={lang}
           dictionary={dictionary}
-          wrapperClassName="sm:col-span-2"
         />
         <div className="sm:col-span-2">
           {/* contents locale tab area */}
@@ -464,7 +462,7 @@ function FaqItemDetailViewer({
     <>
       <div>
         <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6">
-          <div className="sm:col-span-2">
+          <div>
             <div className="text-sm font-medium text-color-label">
               {dictionary.types.faq_item.slug}
             </div>
@@ -472,7 +470,7 @@ function FaqItemDetailViewer({
               {item.slug}
             </div>
           </div>
-          <div className="sm:col-span-2">
+          <div>
             <div className="text-sm font-medium text-color-label">
               {dictionary.types.faq_item.category}
             </div>
@@ -561,7 +559,17 @@ function FaqItemDetailViewer({
             })}
           </div>
         </div>
-        <div className="flex items-center gap-x-3 mt-6">
+        <div className="mt-8 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6">
+          <div>
+            <div className="text-sm font-medium text-color-label">
+              {dictionary.types.faq_item.publish_status}
+            </div>
+            <div className="mt-1 text-base font-medium text-color-base">
+              {item.is_published ? dictionary.public : dictionary.draft}
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-x-3 mt-4">
           <Button
             type="button"
             intent="danger"

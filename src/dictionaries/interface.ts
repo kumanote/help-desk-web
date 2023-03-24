@@ -19,6 +19,8 @@ export interface Dictionary {
   no_data_found: string
   menu: string
   publish: string
+  public: string
+  draft: string
   types: {
     workspace: {
       name: string
@@ -46,6 +48,7 @@ export interface Dictionary {
       slug: string
       slug_help: string
       category: string
+      publish_status: string
     }
     faq_item_content: {
       locale: string
