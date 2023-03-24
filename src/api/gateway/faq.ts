@@ -7,6 +7,7 @@ import {
   CreateFaqCategoryContent,
   UpdateFaqCategoryContent,
 } from '@/api/schema/faq_category_content'
+import { FaqCategoryItem } from '@/api/schema/faq_category_item'
 import { FaqItem, SearchedFaqItem } from '@/api/schema/faq_item'
 import { CreateFaqItemContent } from '@/api/schema/faq_item_content'
 import { FaqSettings } from '@/api/schema/faq_settings'
@@ -290,6 +291,94 @@ export async function reorderFaqCategory({
   if (response.ok) {
     return {
       ok: await response.text(),
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
+export async function reorderFaqItemByCategory({
+  lang,
+  access_token,
+  faq_category_id,
+  faq_item_id,
+  target_faq_item_id,
+  append,
+}: {
+  lang: Lang
+  access_token: string
+  faq_category_id: string
+  faq_item_id: string
+  target_faq_item_id: string
+  append: boolean
+}): Promise<ResponseResult<string, ErrorResponse>> {
+  const data = {
+    faq_item_id,
+    target_faq_item_id,
+    append,
+  }
+  const response = await fetch(
+    `${API_BASE_URL}/faq/categories/${faq_category_id}/reorder_items`,
+    {
+      method: 'POST',
+      cache: 'no-store',
+      headers: {
+        'Accept-Language': lang,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      },
+      body: JSON.stringify(data),
+    }
+  )
+  if (response.ok) {
+    return {
+      ok: await response.text(),
+    }
+  } else {
+    return {
+      err: (await response.json()) as ErrorResponse,
+    }
+  }
+}
+
+export async function searchFaqItemByCategory({
+  lang,
+  access_token,
+  faq_category_id,
+  limit,
+  offset,
+}: {
+  lang: Lang
+  access_token: string
+  faq_category_id: string
+  limit: number
+  offset: number
+}): Promise<ResponseResult<PagingResult<FaqCategoryItem>, ErrorResponse>> {
+  const params: {
+    limit: string
+    offset: string
+  } = {
+    limit: String(limit),
+    offset: String(offset),
+  }
+  const query = new URLSearchParams(params)
+  const response = await fetch(
+    `${API_BASE_URL}/faq/categories/${faq_category_id}/items/?${query}`,
+    {
+      method: 'GET',
+      cache: 'no-store',
+      headers: {
+        'Accept-Language': lang,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  )
+  if (response.ok) {
+    return {
+      ok: (await response.json()) as PagingResult<FaqCategoryItem>,
     }
   } else {
     return {

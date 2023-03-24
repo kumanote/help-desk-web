@@ -85,6 +85,7 @@ export interface Dictionary {
         }
         detail: {
           title: string
+          search_items: string
         }
       }
       admin: {
@@ -122,6 +123,7 @@ export interface Dictionary {
       succeeded: string
     }
     reorder_category_succeeded: string
+    reorder_item_succeeded: string
     create_item_succeeded: string
     update_item_succeeded: string
     delete_item: {
