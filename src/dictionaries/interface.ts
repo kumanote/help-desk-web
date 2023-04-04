@@ -21,6 +21,8 @@ export interface Dictionary {
   publish: string
   public: string
   draft: string
+  enabled: string
+  disabled: string
   types: {
     workspace: {
       name: string
@@ -28,6 +30,18 @@ export interface Dictionary {
     agent: {
       name: string
       email: string
+    }
+    inquiry_settings: {
+      line: {
+        title: string
+        enabled: string
+        friend_url: string
+        friend_qr_code_url: string
+      }
+      notification: {
+        title: string
+        slack_webhook_url: string
+      }
     }
     faq_settings: {
       home_url: string
@@ -63,6 +77,32 @@ export interface Dictionary {
     announcement: string
     workspace: string
     profile: string
+    inquiry_features: {
+      thread: {
+        title: string
+        description: string
+        search: {
+          title: string
+        }
+        detail: {
+          title: string
+        }
+      }
+      contact: {
+        title: string
+        description: string
+        search: {
+          title: string
+        }
+        detail: {
+          title: string
+        }
+      }
+      admin: {
+        title: string
+        description: string
+      }
+    }
     faq_features: {
       item: {
         title: string
@@ -110,6 +150,15 @@ export interface Dictionary {
         description: string
       }
     }
+  }
+  inquiry: {
+    title: string
+    settings_not_initialized_warning: {
+      title: string
+      description: string
+      nav_label: string
+    }
+    update_settings_succeeded: string
   }
   faq: {
     title: string

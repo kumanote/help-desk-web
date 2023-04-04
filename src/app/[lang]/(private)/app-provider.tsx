@@ -26,6 +26,7 @@ export interface GlobalNavigationItem {
   label: string
   icon: any
   href: string
+  pathPrefix: string
   current: boolean
 }
 
@@ -109,20 +110,23 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         label: dict.navigations.dashboard,
         icon: HomeIcon,
         href: `/${lang}/dashboard`,
+        pathPrefix: `/${lang}/dashboard`,
         current: false,
       },
       {
         name: 'inquiry',
         label: dict.navigations.inquiry,
         icon: InboxIcon,
-        href: `/${lang}/inquiry`,
+        href: `/${lang}/inquiry/threads`,
+        pathPrefix: `/${lang}/inquiry`,
         current: false,
       },
       {
         name: 'faq',
         label: dict.navigations.faq,
         icon: QuestionMarkCircleIcon,
-        href: `/${lang}/faq`,
+        href: `/${lang}/faq/items`,
+        pathPrefix: `/${lang}/faq`,
         current: false,
       },
       {
@@ -130,6 +134,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         label: dict.navigations.announcement,
         icon: InformationCircleIcon,
         href: `/${lang}/announcement`,
+        pathPrefix: `/${lang}/announcement`,
         current: false,
       },
       {
@@ -137,6 +142,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         label: dict.navigations.workspace,
         icon: Cog8ToothIcon,
         href: `/${lang}/workspace`,
+        pathPrefix: `/${lang}/workspace`,
         current: false,
       },
     ]
@@ -171,7 +177,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     globalNavigationItems = globalNavigationItems.map((item) => {
       return {
         ...item,
-        current: pathname !== null && pathname.startsWith(item.href),
+        current: pathname !== null && pathname.startsWith(item.pathPrefix),
       }
     })
     // global(header) profile navigation items

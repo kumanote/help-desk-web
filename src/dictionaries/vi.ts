@@ -21,6 +21,10 @@ const dictionary: Dictionary = {
   no_data_found: 'No data found',
   menu: 'menu',
   publish: 'publish',
+  public: 'public',
+  draft: 'draft',
+  enabled: 'enabled',
+  disabled: 'disabled',
   types: {
     workspace: {
       name: 'workspace name',
@@ -28,6 +32,18 @@ const dictionary: Dictionary = {
     agent: {
       name: 'name',
       email: 'email address',
+    },
+    inquiry_settings: {
+      line: {
+        title: 'Line settings',
+        enabled: 'Enable Line',
+        friend_url: 'Line friend URL',
+        friend_qr_code_url: 'Line friend QR code URL',
+      },
+      notification: {
+        title: 'Notification settings',
+        slack_webhook_url: 'Slack webhook URL',
+      },
     },
     faq_settings: {
       home_url: 'home url',
@@ -49,6 +65,7 @@ const dictionary: Dictionary = {
       slug: 'slug',
       slug_help: 'Slug will become part of the URL for this article.',
       category: 'category',
+      publish_status: 'status',
     },
     faq_item_content: {
       locale: 'language',
@@ -63,6 +80,32 @@ const dictionary: Dictionary = {
     announcement: 'announcement',
     workspace: 'system settings',
     profile: 'profile',
+    inquiry_features: {
+      thread: {
+        title: 'Inquiry',
+        description: 'You can view and respond inquiry details.',
+        search: {
+          title: 'Inquiries',
+        },
+        detail: {
+          title: 'Inquiry details',
+        },
+      },
+      contact: {
+        title: 'Contacts',
+        description: 'You can view contact details.',
+        search: {
+          title: 'Contacts',
+        },
+        detail: {
+          title: 'Contact details',
+        },
+      },
+      admin: {
+        title: 'Admin',
+        description: 'You can manage Inquiry system settings',
+      },
+    },
     faq_features: {
       item: {
         title: 'Article',
@@ -110,6 +153,17 @@ const dictionary: Dictionary = {
         description: 'You can switch languages.',
       },
     },
+  },
+  inquiry: {
+    title: 'Inquiry',
+    settings_not_initialized_warning: {
+      title: 'The inquiry system settings has not been initialized.',
+      description:
+        'When using the Inquiry function, it is necessary to configure the Inquiry system settings in advance.',
+      nav_label: 'Navigate me to system settings',
+    },
+    update_settings_succeeded:
+      'inquiry system settings has been saved completely successfully.',
   },
   faq: {
     title: 'FAQ',

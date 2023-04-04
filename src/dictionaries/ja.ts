@@ -23,6 +23,8 @@ const dictionary: Dictionary = {
   publish: '公開する',
   public: '公開中',
   draft: '非公開',
+  enabled: '有効',
+  disabled: '停止',
   types: {
     workspace: {
       name: 'ワークスペース名',
@@ -30,6 +32,18 @@ const dictionary: Dictionary = {
     agent: {
       name: '名前',
       email: 'メールアドレス',
+    },
+    inquiry_settings: {
+      line: {
+        title: 'Line設定',
+        enabled: '利用可否',
+        friend_url: '友だち追加用のURL',
+        friend_qr_code_url: '友だち追加QRコードのURL',
+      },
+      notification: {
+        title: '通知設定',
+        slack_webhook_url: 'Slack通知用Webhook URL',
+      },
     },
     faq_settings: {
       home_url: 'サービスURL',
@@ -67,6 +81,32 @@ const dictionary: Dictionary = {
     announcement: 'お知らせ',
     workspace: 'システム設定',
     profile: 'プロフィール',
+    inquiry_features: {
+      thread: {
+        title: 'お問合せ',
+        description: 'お問合せ内容の確認・返信ができます。',
+        search: {
+          title: 'お問合せ一覧',
+        },
+        detail: {
+          title: 'お問合せ詳細',
+        },
+      },
+      contact: {
+        title: '連絡先',
+        description: '連絡先の確認ができます。',
+        search: {
+          title: '連絡先一覧',
+        },
+        detail: {
+          title: '連絡先詳細',
+        },
+      },
+      admin: {
+        title: '管理',
+        description: 'お問合せのシステム設定を管理できます。',
+      },
+    },
     faq_features: {
       item: {
         title: '記事',
@@ -114,6 +154,16 @@ const dictionary: Dictionary = {
         description: '表示用の言語を切り替えられます。',
       },
     },
+  },
+  inquiry: {
+    title: 'お問合せ',
+    settings_not_initialized_warning: {
+      title: 'お問合せのシステム設定が初期化されていません。',
+      description:
+        'お問合せの機能を利用する際は、事前にお問合せのシステム設定を行う必要があります。',
+      nav_label: 'お問合せシステム設定に移動',
+    },
+    update_settings_succeeded: 'お問合せシステム設定を保存しました。',
   },
   faq: {
     title: 'FAQ',

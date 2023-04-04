@@ -8,6 +8,7 @@ interface Props {
   value?: boolean
   onChange: (value: boolean) => void
   error?: string
+  label?: string
   wrapperClassName?: string
   children?: ReactNode
 }
@@ -16,6 +17,7 @@ export function Toggle({
   value,
   onChange,
   error,
+  label,
   wrapperClassName,
   children,
 }: Props) {
@@ -23,6 +25,11 @@ export function Toggle({
   const hasError = !!error
   return (
     <div className={wrapperClassName}>
+      {label && (
+        <span className="block text-sm font-medium text-color-label mb-1">
+          {label}
+        </span>
+      )}
       <Switch.Group as="div" className="flex items-center">
         <Switch
           checked={value}
