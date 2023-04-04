@@ -25,27 +25,34 @@ export function Sidebar() {
           <div className="mt-6 w-full flex-1 space-y-1 px-2 flex flex-col items-center">
             {appState.globalNavigationItems.map((item) => {
               return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={clsx(
-                    item.current
-                      ? 'bg-primary-200 dark:bg-primary-700'
-                      : 'hover:bg-primary-200 dark:hover:bg-primary-700',
-                    'group inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  <item.icon
+                <span key={item.name} className="relative group">
+                  <span
+                    className="z-50 whitespace-nowrap rounded text-white dark:text-primary-900 bg-primary-800 dark:bg-primary-20http://localhost:3000/ja/inquiry/admin
+                  0 px-2 py-1 text-xs translate-y-10 translate-x-10 fixed opacity-0 group-hover:opacity-100 transition pointer-events-none"
+                  >
+                    {item.label}
+                  </span>
+                  <Link
+                    href={item.href}
                     className={clsx(
                       item.current
-                        ? 'text-primary-700 dark:text-primary-200'
-                        : 'text-gray-500 group-hover:text-primary-700 dark:group-hover:text-primary-200',
-                      'h-6 w-6'
+                        ? 'bg-primary-200 dark:bg-primary-700'
+                        : 'hover:bg-primary-200 dark:hover:bg-primary-700',
+                      'group inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg'
                     )}
-                    aria-hidden="true"
-                  />
-                </Link>
+                    aria-current={item.current ? 'page' : undefined}
+                  >
+                    <item.icon
+                      className={clsx(
+                        item.current
+                          ? 'text-primary-700 dark:text-primary-200'
+                          : 'text-gray-500 group-hover:text-primary-700 dark:group-hover:text-primary-200',
+                        'h-6 w-6'
+                      )}
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </span>
               )
             })}
           </div>
